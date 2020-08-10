@@ -1,8 +1,11 @@
 # Imports
 
+from Lib.random import random
+
 # Qt Modules
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QFileDialog
 from src.ui.tp1ui import Ui_Form
 
 # Matplotlib Modules
@@ -35,6 +38,26 @@ class PlotTool(QWidget, Ui_Form):
         self.habilitarSegundoGrafico_CheckBox.stateChanged.connect(self.__cb_habilitarSegundoGrafico)
         self.__cb_habilitarSegundoGrafico()
 
+        self.spice_PushButton.clicked.connect(self.__cb_spice)
+
+        self.borrarGraficos_PushButton.clicked.connect(self.__borrarGraficos)
+        self.__borrarGraficos()
+
+    def __add_plots(self):
+        pass
+
+    def __add_plot_superior(self,x,y):
+        self.graficoSuperior_Axis.plot(x,y)
+        self.graficoSuperior_Canvas.draw()
+
+    def __add_plot_inferior(self):
+        pass
+
+    def __cb_spice(self):
+        path, _ = QFileDialog.getOpenFileName(filter="*.txt")
+        print(path)
+        self.__add_plot_superior([1,2,3],[random(),random(),random()])
+
     def __cb_habilitarSegundoGrafico(self):
         if self.habilitarSegundoGrafico_CheckBox.isChecked():
             self.__habilitarSegundoGrafico()
@@ -52,4 +75,13 @@ class PlotTool(QWidget, Ui_Form):
         self.yLabel2_LineEdit.hide()
         self.selectorGraficoEntrada_ComboBox.hide()
         self.graficoInferior_StackedWidget.hide()
+
+    def __borrarGraficos(self):
+        self.graficoSuperior_Axis.clear()
+        self.graficoSuperior_Axis.grid()
+        self.graficoSuperior_Canvas.draw()
+
+        self.graficoInferior_Axis.clear()
+        self.graficoInferior_Axis.grid()
+        self.graficoInferior_Canvas.draw()
 
