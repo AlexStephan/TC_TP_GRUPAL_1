@@ -17,42 +17,42 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QCheckBox" name="checkBox">
+      <widget class="QCheckBox" name="habilitarSegundoGrafico_CheckBox">
        <property name="text">
         <string>Segundo gráfico</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="xLabel_LineEdit">
        <property name="placeholderText">
         <string>x Label</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="yLabel_LineEdit">
        <property name="placeholderText">
         <string>y Label</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_4">
+      <widget class="QLineEdit" name="xLabel2_LineEdit">
        <property name="placeholderText">
         <string>x Label 2</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_3">
+      <widget class="QLineEdit" name="yLabel2_LineEdit">
        <property name="placeholderText">
         <string>y Label 2</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="selectorGraficoEntrada_ComboBox">
        <item>
         <property name="text">
          <string>Entrada de gráfico superior</string>
@@ -71,42 +71,42 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="funcionTransferencia_PushButton">
        <property name="text">
         <string>H(s)</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="spice_PushButton">
        <property name="text">
         <string>SPICE</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_4">
+      <widget class="QPushButton" name="medicion_PushButton">
        <property name="text">
         <string>Medición (csv)</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="borrarGraficos_PushButton">
        <property name="text">
         <string>BORRAR GRÁFICOS</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_5">
+      <widget class="QPushButton" name="guardar_PushButton">
        <property name="text">
         <string>Guardar</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_2">
+      <widget class="QCheckBox" name="comingSoon_CheckBox">
        <property name="text">
         <string>COMING SOON</string>
        </property>
@@ -131,13 +131,13 @@
       </widget>
      </item>
      <item>
-      <widget class="QStackedWidget" name="stackedWidget">
+      <widget class="QStackedWidget" name="graficoSuperior_StackedWidget">
        <widget class="QWidget" name="page"/>
        <widget class="QWidget" name="page_2"/>
       </widget>
      </item>
      <item>
-      <widget class="QStackedWidget" name="stackedWidget_2">
+      <widget class="QStackedWidget" name="graficoInferior_StackedWidget">
        <widget class="QWidget" name="page_3"/>
        <widget class="QWidget" name="page_4"/>
       </widget>
