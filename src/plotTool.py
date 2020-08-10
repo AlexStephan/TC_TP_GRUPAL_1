@@ -16,6 +16,17 @@ import matplotlib.pyplot as plt
 # Python Modules
 import numpy as np
 import scipy.signal as ss
+from enum import Enum
+
+# My Own Modules
+
+from src.backend.dataFromFile import DataFromFile
+
+
+class Entrada(Enum):
+    SUP = 0
+    INF = 1
+    BODE = 2
 
 
 class PlotTool(QWidget, Ui_Form):
@@ -44,7 +55,12 @@ class PlotTool(QWidget, Ui_Form):
         self.__borrarGraficos()
 
     def __add_plots(self, data):
-        pass
+        if self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.SUP:
+            pass
+        elif self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.INF:
+            pass
+        elif self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.BODE:
+            pass
 
     def __add_plot_superior(self,x,y):
         self.graficoSuperior_Axis.plot(x,y)
@@ -56,9 +72,13 @@ class PlotTool(QWidget, Ui_Form):
 
     def __cb_spice(self):
         path, _ = QFileDialog.getOpenFileName(filter="*.txt")
-        print(path)
-        if path != "":
-            self.__add_plot_superior([1,2,3],[random(),random(),random()])
+
+        data = DataFromFile()
+        data.load_file(path)
+        if data.is_valid():
+            self.__add_plots(data.get_plots())
+        else:
+            print("Archivo inválido")
 
     def __cb_habilitarSegundoGrafico(self):
         if self.habilitarSegundoGrafico_CheckBox.isChecked():
