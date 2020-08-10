@@ -21,3 +21,24 @@ class PlotTool(QWidget, Ui_Form):
         self.setupUi(self)
         self.setWindowTitle("TP GRUPAL 1 - TEORÍA DE CIRCUITOS")
 
+        self.habilitarSegundoGrafico_CheckBox.stateChanged.connect(self.__cb_habilitarSegundoGrafico)
+        self.__cb_habilitarSegundoGrafico()
+
+    def __cb_habilitarSegundoGrafico(self):
+        if self.habilitarSegundoGrafico_CheckBox.isChecked():
+            self.__habilitarSegundoGrafico()
+        else:
+            self.__deshabilitarSegundoGrafico()
+
+    def __habilitarSegundoGrafico(self):
+        self.xLabel2_LineEdit.show()
+        self.yLabel2_LineEdit.show()
+        self.selectorGraficoEntrada_ComboBox.show()
+        self.graficoInferior_StackedWidget.show()
+
+    def __deshabilitarSegundoGrafico(self):
+        self.xLabel2_LineEdit.hide()
+        self.yLabel2_LineEdit.hide()
+        self.selectorGraficoEntrada_ComboBox.hide()
+        self.graficoInferior_StackedWidget.hide()
+
