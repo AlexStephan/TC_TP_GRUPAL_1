@@ -43,20 +43,22 @@ class PlotTool(QWidget, Ui_Form):
         self.borrarGraficos_PushButton.clicked.connect(self.__borrarGraficos)
         self.__borrarGraficos()
 
-    def __add_plots(self):
+    def __add_plots(self, data):
         pass
 
     def __add_plot_superior(self,x,y):
         self.graficoSuperior_Axis.plot(x,y)
         self.graficoSuperior_Canvas.draw()
 
-    def __add_plot_inferior(self):
-        pass
+    def __add_plot_inferior(self,x,y):
+        self.graficoInferior_Axis.plot(x, y)
+        self.graficoInferior_Canvas.draw()
 
     def __cb_spice(self):
         path, _ = QFileDialog.getOpenFileName(filter="*.txt")
         print(path)
-        self.__add_plot_superior([1,2,3],[random(),random(),random()])
+        if path != "":
+            self.__add_plot_superior([1,2,3],[random(),random(),random()])
 
     def __cb_habilitarSegundoGrafico(self):
         if self.habilitarSegundoGrafico_CheckBox.isChecked():
