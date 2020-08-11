@@ -137,9 +137,21 @@
       </widget>
      </item>
      <item>
+      <widget class="QStackedWidget" name="navegation1">
+       <widget class="QWidget" name="page_7"/>
+       <widget class="QWidget" name="page_8"/>
+      </widget>
+     </item>
+     <item>
       <widget class="QStackedWidget" name="graficoInferior_StackedWidget">
        <widget class="QWidget" name="page_3"/>
        <widget class="QWidget" name="page_4"/>
+      </widget>
+     </item>
+     <item>
+      <widget class="QStackedWidget" name="navegation2">
+       <widget class="QWidget" name="page_5"/>
+       <widget class="QWidget" name="page_6"/>
       </widget>
      </item>
     </layout>

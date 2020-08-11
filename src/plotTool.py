@@ -4,12 +4,13 @@ from Lib.random import random
 
 # Qt Modules
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QMainWindow
 from PyQt5.QtWidgets import QFileDialog
 from src.ui.tp1ui import Ui_Form
 
 # Matplotlib Modules
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigarionToolbar
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 
@@ -35,7 +36,7 @@ class Grafico(Enum):
     MEDIDO = "s"
 
 
-class PlotTool(QWidget, Ui_Form):
+class PlotTool(Ui_Form, QMainWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
@@ -51,6 +52,12 @@ class PlotTool(QWidget, Ui_Form):
         self.graficoInferior_StackedWidget.setCurrentIndex(self.graficoInferior_Index)
         self.graficoSuperior_Axis = self.graficoSuperior_Figure.add_subplot()
         self.graficoInferior_Axis = self.graficoInferior_Figure.add_subplot()
+
+        self.navigationTool1_Figure= Figure(figsize=(5, 3))
+        self.navigationTool1_Canvas = FigureCanvas(self.navigationTool1_Figure)
+        self.navigationTool1_Index = self.navegation1.addWidget(self.navigationTool1_Canvas)
+        self.navegation1.setCurrentIndex(self.navigationTool1_Index)
+        self.navegationTool1_Axis = self.addToolBar(Qt.BottomToolBarArea,NavigarionToolbar(self.navigationTool1_Canvas,self))
 
         self.habilitarSegundoGrafico_CheckBox.stateChanged.connect(self.__cb_habilitarSegundoGrafico)
         self.__cb_habilitarSegundoGrafico()
