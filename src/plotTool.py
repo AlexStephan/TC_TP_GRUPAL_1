@@ -54,13 +54,24 @@ class PlotTool(QWidget, Ui_Form):
         self.borrarGraficos_PushButton.clicked.connect(self.__borrarGraficos)
         self.__borrarGraficos()
 
-    def __add_plots(self, data):
-        if self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.SUP:
-            pass
-        elif self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.INF:
-            pass
-        elif self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.BODE:
-            pass
+    def __add_plots(self, obj: DataFromFile):
+        size=obj.number_of_plots()
+
+        if self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.SUP.value:
+            for index in range(size):
+                x, y = obj.get_plot(index)
+                self.__add_plot_superior(x, y)
+        elif self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.INF.value:
+            for index in range(size):
+                x, y = obj.get_plot(index)
+                self.__add_plot_inferior(x, y)
+        elif self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.BODE.value:
+            for index in range(size):
+                x, y = obj.get_plot(index)
+                if index % 2 == 0:
+                    self.__add_plot_superior(x, y)
+                else:
+                    self.__add_plot_inferior(x, y)
 
     def __add_plot_superior(self,x,y):
         self.graficoSuperior_Axis.plot(x,y)
@@ -76,7 +87,7 @@ class PlotTool(QWidget, Ui_Form):
         data = DataFromFile()
         data.load_file(path)
         if data.is_valid():
-            self.__add_plots(data.get_plots())
+            self.__add_plots(data)
         else:
             print("Archivo inválido")
 

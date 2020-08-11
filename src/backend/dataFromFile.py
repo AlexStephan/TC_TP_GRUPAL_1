@@ -1,16 +1,24 @@
+import numpy as np
+from Lib.random import random, randrange
+
+
 class DataFromFile:
     def __init__(self):
-        pass
+        self.path = ""
 
     def load_file(self, path):
-        print(path)
+        self.path = path
+        print(self.path)
 
     def is_valid(self):
-        return True
+        return self.path != ""
 
     def number_of_plots(self):
-        return 3
+        return randrange(1,10,1)
 
-    def get_plots(self):
-        return [[[1, 2, 3], [2, 4, 8]], [[1, 3], [4, 2]], [[0, 1], [0, -1]]]
+    def get_plot(self,index):
+        size = randrange(3,20,1)
+        x = np.linspace(0,5,size)
+        y = np.random.rand(size)
+        return x,y
 
