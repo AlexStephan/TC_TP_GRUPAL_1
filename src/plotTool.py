@@ -9,9 +9,11 @@ from PyQt5.QtWidgets import QFileDialog
 from src.ui.tp1ui import Ui_Form
 
 # Matplotlib Modules
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
 # Python Modules
 import numpy as np
@@ -49,9 +51,14 @@ class PlotTool(QWidget, Ui_Form):
         self.graficoInferior_Index = self.graficoInferior_StackedWidget.addWidget(self.graficoInferior_Canvas)
         self.graficoSuperior_StackedWidget.setCurrentIndex(self.graficoSuperior_Index)
         self.graficoInferior_StackedWidget.setCurrentIndex(self.graficoInferior_Index)
+
+        self.toolbarSuperior = NavigationToolbar(self.graficoSuperior_Canvas, self)
+        self.toolbarInferior = NavigationToolbar(self.graficoInferior_Canvas, self) #Codigo Magico Gian
+        self.navigation1.addWidget(self.toolbarSuperior)
+        self.navigation2.addWidget(self.toolbarInferior)
+
         self.graficoSuperior_Axis = self.graficoSuperior_Figure.add_subplot()
         self.graficoInferior_Axis = self.graficoInferior_Figure.add_subplot()
-
         self.habilitarSegundoGrafico_CheckBox.stateChanged.connect(self.__cb_habilitarSegundoGrafico)
         self.__cb_habilitarSegundoGrafico()
 
