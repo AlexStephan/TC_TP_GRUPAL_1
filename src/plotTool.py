@@ -88,12 +88,14 @@ class PlotTool(QWidget, Ui_Form):
                     self.__add_plot_inferior(x, y,marker,legend)
 
     def __add_plot_superior(self,x,y,marker,legend):
-        self.graficoSuperior_Axis.plot(x,y, marker=marker)
+        self.graficoSuperior_Axis.plot(x,y, marker=marker, label=legend)
         self.graficoSuperior_Canvas.draw()
+        self.graficoSuperior_Axis.legend()
 
     def __add_plot_inferior(self,x,y,marker,legend):
-        self.graficoInferior_Axis.plot(x,y, marker=marker)
+        self.graficoInferior_Axis.plot(x,y, marker=marker, label=legend)
         self.graficoInferior_Canvas.draw()
+        self.graficoInferior_Axis.legend()
 
     def __cb_spice(self):
         path, _ = QFileDialog.getOpenFileName(filter="*.txt")
