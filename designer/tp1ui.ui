@@ -24,34 +24,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="xLabel_LineEdit">
-       <property name="placeholderText">
-        <string>x Label</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="yLabel_LineEdit">
-       <property name="placeholderText">
-        <string>y Label</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="xLabel2_LineEdit">
-       <property name="placeholderText">
-        <string>x Label 2</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="yLabel2_LineEdit">
-       <property name="placeholderText">
-        <string>y Label 2</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QComboBox" name="selectorGraficoEntrada_ComboBox">
        <item>
         <property name="text">
@@ -99,18 +71,17 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="guardar_PushButton">
-       <property name="text">
-        <string>Guardar</string>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="comingSoon_CheckBox">
-       <property name="text">
-        <string>COMING SOON</string>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
        </property>
-      </widget>
+      </spacer>
      </item>
     </layout>
    </item>
@@ -137,7 +108,29 @@
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="navigation1"/>
+      <widget class="QFrame" name="frame">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="navigation1">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+         </layout>
+        </item>
+       </layout>
+      </widget>
      </item>
      <item>
       <widget class="QStackedWidget" name="graficoInferior_StackedWidget">
@@ -146,7 +139,25 @@
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="navigation2"/>
+      <widget class="QFrame" name="frame_2">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>60</height>
+        </size>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Raised</enum>
+       </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <layout class="QHBoxLayout" name="navigation2"/>
+        </item>
+       </layout>
+      </widget>
      </item>
     </layout>
    </item>

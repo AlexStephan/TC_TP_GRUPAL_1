@@ -68,30 +68,30 @@ class PlotTool(QWidget, Ui_Form):
         self.borrarGraficos_PushButton.clicked.connect(self.__borrarGraficos)
         self.__borrarGraficos()
 
-    def __add_plots(self, obj: DataFromFile,marker):
+    def __add_plots(self, obj: DataFromFile,marker,legend):
         size=obj.number_of_plots()
 
         if self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.SUP.value:
             for index in range(size):
                 x, y = obj.get_plot(index)
-                self.__add_plot_superior(x, y,marker)
+                self.__add_plot_superior(x, y,marker,legend)
         elif self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.INF.value:
             for index in range(size):
                 x, y = obj.get_plot(index)
-                self.__add_plot_inferior(x, y,marker)
+                self.__add_plot_inferior(x, y,marker,legend)
         elif self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.BODE.value:
             for index in range(size):
                 x, y = obj.get_plot(index)
                 if index % 2 == 0:
-                    self.__add_plot_superior(x, y,marker)
+                    self.__add_plot_superior(x, y,marker,legend)
                 else:
-                    self.__add_plot_inferior(x, y,marker)
+                    self.__add_plot_inferior(x, y,marker,legend)
 
-    def __add_plot_superior(self,x,y,marker):
+    def __add_plot_superior(self,x,y,marker,legend):
         self.graficoSuperior_Axis.plot(x,y, marker=marker)
         self.graficoSuperior_Canvas.draw()
 
-    def __add_plot_inferior(self,x,y,marker):
+    def __add_plot_inferior(self,x,y,marker,legend):
         self.graficoInferior_Axis.plot(x,y, marker=marker)
         self.graficoInferior_Canvas.draw()
 
@@ -101,7 +101,7 @@ class PlotTool(QWidget, Ui_Form):
         data = DataFromFile()
         data.load_file(path)
         if data.is_valid():
-            self.__add_plots(data,Grafico.LTSPICE.value)
+            self.__add_plots(data,Grafico.LTSPICE.value,"SIMULADO")
         else:
             print("Archivo inválido")
 
@@ -111,7 +111,7 @@ class PlotTool(QWidget, Ui_Form):
         data = DataFromFile()
         data.load_file(path)
         if data.is_valid():
-            self.__add_plots(data,Grafico.MEDIDO.value)
+            self.__add_plots(data,Grafico.MEDIDO.value,"MEDIDO")
         else:
             print("Archivo inválido")
 
@@ -122,16 +122,18 @@ class PlotTool(QWidget, Ui_Form):
             self.__deshabilitarSegundoGrafico()
 
     def __habilitarSegundoGrafico(self):
-        self.xLabel2_LineEdit.show()
-        self.yLabel2_LineEdit.show()
+        #self.xLabel2_LineEdit.show()
+        #self.yLabel2_LineEdit.show()
         self.selectorGraficoEntrada_ComboBox.show()
         self.graficoInferior_StackedWidget.show()
+        self.frame_2.show()
 
     def __deshabilitarSegundoGrafico(self):
-        self.xLabel2_LineEdit.hide()
-        self.yLabel2_LineEdit.hide()
+        #self.xLabel2_LineEdit.hide()
+        #self.yLabel2_LineEdit.hide()
         self.selectorGraficoEntrada_ComboBox.hide()
         self.graficoInferior_StackedWidget.hide()
+        self.frame_2.hide()
         self.selectorGraficoEntrada_ComboBox.setCurrentIndex(Entrada.SUP.value)
 
     def __borrarGraficos(self):
