@@ -73,7 +73,7 @@ class PlotTool(QWidget, Ui_Form):
         self.funcionTransferencia_PushButton.clicked.connect(self.__cb_Hs)
         self.__habilita_deshabilita_Hs()
 
-    def __add_plots(self, obj: DataFromFile,marker,legend):
+    def __add_plots_from_file(self, obj: DataFromFile,marker,legend):
         size=obj.number_of_plots()
 
         if self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.SUP.value:
@@ -125,12 +125,12 @@ class PlotTool(QWidget, Ui_Form):
         self.line_2.hide()
 
     def __cb_spice(self):
-        path, _ = QFileDialog.getOpenFileName(filter="*.txt")
+        path, _ = QFileDialog.getOpenFileName(filter="*.raw")
 
         data = DataFromFile()
         data.load_file(path)
         if data.is_valid():
-            self.__add_plots(data,Grafico.LTSPICE.value,"SIMULADO")
+            self.__add_plots_from_file(data,Grafico.LTSPICE.value,"SIMULADO")
         else:
             print("Archivo inválido")
 
@@ -140,7 +140,7 @@ class PlotTool(QWidget, Ui_Form):
         data = DataFromFile()
         data.load_file(path)
         if data.is_valid():
-            self.__add_plots(data,Grafico.MEDIDO.value,"MEDIDO")
+            self.__add_plots_from_file(data,Grafico.MEDIDO.value,"MEDIDO")
         else:
             print("Archivo inválido")
 
