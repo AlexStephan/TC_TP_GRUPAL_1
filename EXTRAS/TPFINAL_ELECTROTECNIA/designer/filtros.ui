@@ -1,0 +1,1065 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>848</width>
+    <height>580</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_5">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalAll">
+     <item>
+      <layout class="QVBoxLayout" name="verticalSelect">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalMain">
+         <item>
+          <layout class="QVBoxLayout" name="layoutGrado">
+           <item>
+            <widget class="QComboBox" name="comboGrado">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>20</height>
+              </size>
+             </property>
+             <item>
+              <property name="text">
+               <string>Primer Orden</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Segundo Orden</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="combo1er">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>20</height>
+              </size>
+             </property>
+             <item>
+              <property name="text">
+               <string>Pasa Bajos</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Pasa Altos</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Pasa Todo</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Arbitrario</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="combo2do">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>20</height>
+              </size>
+             </property>
+             <item>
+              <property name="text">
+               <string>Pasa Bajos</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Pasa Altos</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Pasa Todo</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Pasa Banda</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Notch</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Low-pass Notch</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>High-pass Notch</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Arbitrario</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QPushButton" name="pushSimular">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>SIMULAR</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="labelTipoFiltro">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>13</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Tipo de filtro</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="layoutConfig">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalConfig">
+           <item>
+            <layout class="QVBoxLayout" name="verticalConfigPolosCeros">
+             <item>
+              <layout class="QVBoxLayout" name="layoutPolo">
+               <item>
+                <widget class="QLabel" name="labelPolo">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>13</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Polos</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="complexPolo">
+                 <item>
+                  <widget class="QDoubleSpinBox" name="spinBoxPolo">
+                   <property name="decimals">
+                    <number>4</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-1000000000.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>1000000000.000000000000000</double>
+                   </property>
+                   <property name="stepType">
+                    <enum>QAbstractSpinBox::DefaultStepType</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="spinBoxPoloIm">
+                   <property name="decimals">
+                    <number>4</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-1000000000.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>1000000000.000000000000000</double>
+                   </property>
+                   <property name="stepType">
+                    <enum>QAbstractSpinBox::DefaultStepType</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalPolo">
+                 <item>
+                  <widget class="QCheckBox" name="checkPolo_cero">
+                   <property name="text">
+                    <string>Cero</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="checkPolo_infinito">
+                   <property name="text">
+                    <string>Infinito</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="complexPolo_2">
+                 <item>
+                  <widget class="QDoubleSpinBox" name="spinBoxPolo_2">
+                   <property name="decimals">
+                    <number>4</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-1000000000.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>1000000000.000000000000000</double>
+                   </property>
+                   <property name="stepType">
+                    <enum>QAbstractSpinBox::DefaultStepType</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="spinBoxPoloIm_2">
+                   <property name="decimals">
+                    <number>4</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-1000000000.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>1000000000.000000000000000</double>
+                   </property>
+                   <property name="stepType">
+                    <enum>QAbstractSpinBox::DefaultStepType</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalPolo_2">
+                 <item>
+                  <widget class="QCheckBox" name="checkPolo_cero_2">
+                   <property name="text">
+                    <string>Cero</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="checkPolo_infinito_2">
+                   <property name="text">
+                    <string>Infinito</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="layoutCero">
+               <item>
+                <widget class="QLabel" name="labelCero">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>13</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Ceros</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="complexCero">
+                 <item>
+                  <widget class="QDoubleSpinBox" name="spinBoxCero">
+                   <property name="decimals">
+                    <number>4</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-1000000000.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>1000000000.000000000000000</double>
+                   </property>
+                   <property name="stepType">
+                    <enum>QAbstractSpinBox::DefaultStepType</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="spinBoxCeroIm">
+                   <property name="decimals">
+                    <number>4</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-1000000000.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>1000000000.000000000000000</double>
+                   </property>
+                   <property name="stepType">
+                    <enum>QAbstractSpinBox::DefaultStepType</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalCero">
+                 <item>
+                  <widget class="QCheckBox" name="checkCero_cero">
+                   <property name="text">
+                    <string>Cero</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="checkCero_infinito">
+                   <property name="text">
+                    <string>Infinito</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="complexCero_2">
+                 <item>
+                  <widget class="QDoubleSpinBox" name="spinBoxCero_2">
+                   <property name="decimals">
+                    <number>4</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-1000000000.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>1000000000.000000000000000</double>
+                   </property>
+                   <property name="stepType">
+                    <enum>QAbstractSpinBox::DefaultStepType</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QDoubleSpinBox" name="spinBoxCeroIm_2">
+                   <property name="decimals">
+                    <number>4</number>
+                   </property>
+                   <property name="minimum">
+                    <double>-1000000000.000000000000000</double>
+                   </property>
+                   <property name="maximum">
+                    <double>1000000000.000000000000000</double>
+                   </property>
+                   <property name="stepType">
+                    <enum>QAbstractSpinBox::DefaultStepType</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalCero_2">
+                 <item>
+                  <widget class="QCheckBox" name="checkCero_cero_2">
+                   <property name="text">
+                    <string>Cero</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QCheckBox" name="checkCero_infinito_2">
+                   <property name="text">
+                    <string>Infinito</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="Line" name="line">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalConfigResto">
+             <item>
+              <layout class="QVBoxLayout" name="layoutFrecCorte">
+               <item>
+                <widget class="QLabel" name="labelFrecCorte">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>13</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Frecuencia de corte (rad/s)</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="spinBoxFrecCorte">
+                 <property name="decimals">
+                  <number>4</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-1000000000.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>1000000000.000000000000000</double>
+                 </property>
+                 <property name="stepType">
+                  <enum>QAbstractSpinBox::DefaultStepType</enum>
+                 </property>
+                 <property name="value">
+                  <double>100.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="spinBoxFrecCorte_2">
+                 <property name="decimals">
+                  <number>4</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-1000000000.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>1000000000.000000000000000</double>
+                 </property>
+                 <property name="stepType">
+                  <enum>QAbstractSpinBox::DefaultStepType</enum>
+                 </property>
+                 <property name="value">
+                  <double>50.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="layoutAmortiguamiento">
+               <item>
+                <widget class="QLabel" name="labelAmortiguamiento">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>13</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Razón de amortiguamiento</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="spinBoxAmortiguamiento">
+                 <property name="decimals">
+                  <number>4</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-1000000000.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>1000000000.000000000000000</double>
+                 </property>
+                 <property name="stepType">
+                  <enum>QAbstractSpinBox::DefaultStepType</enum>
+                 </property>
+                 <property name="value">
+                  <double>0.500000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="spinBoxAmortiguamiento_2">
+                 <property name="decimals">
+                  <number>4</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-1000000000.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>1000000000.000000000000000</double>
+                 </property>
+                 <property name="stepType">
+                  <enum>QAbstractSpinBox::DefaultStepType</enum>
+                 </property>
+                 <property name="value">
+                  <double>2.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="layoutGanancia">
+               <item>
+                <widget class="QLabel" name="labelGananciaBanda">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>13</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Ganancia</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="spinBoxGananciaBanda">
+                 <property name="decimals">
+                  <number>4</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-1000000000.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>1000000000.000000000000000</double>
+                 </property>
+                 <property name="stepType">
+                  <enum>QAbstractSpinBox::DefaultStepType</enum>
+                 </property>
+                 <property name="value">
+                  <double>1.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="checkGananciaMaxima">
+                 <property name="text">
+                  <string>Ganancia máxima</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QWidget" name="widget" native="true">
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Graficar Bode entre:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Graficar respuesta hasta:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QSpinBox" name="spinBodeMin">
+              <property name="minimum">
+               <number>-100</number>
+              </property>
+              <property name="maximum">
+               <number>99</number>
+              </property>
+              <property name="value">
+               <number>-6</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBodeMax">
+              <property name="minimum">
+               <number>-99</number>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+              <property name="value">
+               <number>6</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="spinBodeTicks">
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>1000000000</number>
+              </property>
+              <property name="value">
+               <number>50000</number>
+              </property>
+              <property name="displayIntegerBase">
+               <number>10</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="5" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="minimumSize">
+               <size>
+                <width>187</width>
+                <height>204</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border-image:url(:/rrr/index.jpg)</string>
+              </property>
+              <property name="text">
+               <string>aprobado por el itbot</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="0">
+           <layout class="QGridLayout" name="gridLayout_2">
+            <item row="0" column="0">
+             <widget class="QDoubleSpinBox" name="spinGrafRtaTiempo">
+              <property name="suffix">
+               <string> mseg</string>
+              </property>
+              <property name="decimals">
+               <number>6</number>
+              </property>
+              <property name="minimum">
+               <double>0.000001000000000</double>
+              </property>
+              <property name="maximum">
+               <double>1000000000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>20000.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QSpinBox" name="spinGrafRtaTicks">
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>1000000000</number>
+              </property>
+              <property name="value">
+               <number>10000</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="4" column="0">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QTabWidget" name="tabGraf">
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="tabBode">
+        <attribute name="title">
+         <string>Bode</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <layout class="QVBoxLayout" name="verticalBode">
+           <item>
+            <widget class="QStackedWidget" name="stackedBodeAmplitud">
+             <widget class="QWidget" name="page"/>
+             <widget class="QWidget" name="page_2"/>
+            </widget>
+           </item>
+           <item>
+            <widget class="QStackedWidget" name="stackedBodeFase">
+             <widget class="QWidget" name="page_3"/>
+             <widget class="QWidget" name="page_4"/>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tabPolosCeros">
+        <attribute name="title">
+         <string>Polos y ceros</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QStackedWidget" name="stackedPolosCeros">
+           <widget class="QWidget" name="page_5"/>
+           <widget class="QWidget" name="page_6"/>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tabRespuesta">
+        <attribute name="title">
+         <string>Respuesta a señales</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <layout class="QVBoxLayout" name="verticalRespuesta">
+           <item>
+            <widget class="QComboBox" name="comboRespuesta">
+             <item>
+              <property name="text">
+               <string>Senoide</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Escalón</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Pulso periódico</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QStackedWidget" name="stackedWidget">
+             <widget class="QWidget" name="page_7"/>
+             <widget class="QWidget" name="page_8"/>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="layoutRtaAmplitud">
+           <item>
+            <widget class="QLabel" name="labelRtaAmplitud">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>13</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Amplitud</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDoubleSpinBox" name="spinBoxRtaAmplitud">
+             <property name="decimals">
+              <number>4</number>
+             </property>
+             <property name="minimum">
+              <double>0.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
+             </property>
+             <property name="stepType">
+              <enum>QAbstractSpinBox::DefaultStepType</enum>
+             </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="layoutRtaFrecuencia">
+           <item>
+            <widget class="QLabel" name="labelRtaFrecuencia">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>13</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Frecuencia (rad/s)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDoubleSpinBox" name="spinBoxRtaFrecuencia">
+             <property name="decimals">
+              <number>4</number>
+             </property>
+             <property name="minimum">
+              <double>0.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000000.000000000000000</double>
+             </property>
+             <property name="stepType">
+              <enum>QAbstractSpinBox::DefaultStepType</enum>
+             </property>
+             <property name="value">
+              <double>200.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="layoutRtaFase">
+           <item>
+            <widget class="QLabel" name="labelRtaFase">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>13</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Fase (grados)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDoubleSpinBox" name="spinBoxRtaFase">
+             <property name="decimals">
+              <number>4</number>
+             </property>
+             <property name="minimum">
+              <double>-380.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>380.000000000000000</double>
+             </property>
+             <property name="stepType">
+              <enum>QAbstractSpinBox::DefaultStepType</enum>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="layoutRtaPeriodo">
+           <item>
+            <widget class="QLabel" name="labelRtaPeriodo">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>13</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Periodo (mseg)</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDoubleSpinBox" name="spinBoxRtaPeriodo">
+             <property name="decimals">
+              <number>6</number>
+             </property>
+             <property name="minimum">
+              <double>0.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
+             </property>
+             <property name="stepType">
+              <enum>QAbstractSpinBox::DefaultStepType</enum>
+             </property>
+             <property name="value">
+              <double>5.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="layoutRtaDuty">
+           <item>
+            <widget class="QLabel" name="labelRtaDuty">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>13</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Duty Cycle</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDoubleSpinBox" name="spinBoxRtaDuty">
+             <property name="decimals">
+              <number>4</number>
+             </property>
+             <property name="minimum">
+              <double>0.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>100.000000000000000</double>
+             </property>
+             <property name="stepType">
+              <enum>QAbstractSpinBox::DefaultStepType</enum>
+             </property>
+             <property name="value">
+              <double>25.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../resources/res.qrc"/>
+ </resources>
+ <connections/>
+</ui>
