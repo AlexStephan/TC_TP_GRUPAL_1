@@ -118,11 +118,25 @@ class PlotTool(QWidget, Ui_Form):
         self.OK_Hs_PushButton.show()
         self.line_2.show()
 
+        self.label_desde.show()
+        self.label_hasta.show()
+        self.label_pasos.show()
+        self.spinBox_desde.show()
+        self.spinBox_hasta.show()
+        self.spinBox_pasos.show()
+
     def __deshabilitarHs(self):
         self.Numerador_LineEdit.hide()
         self.Denominador_LineEdit.hide()
         self.OK_Hs_PushButton.hide()
         self.line_2.hide()
+
+        self.label_desde.hide()
+        self.label_hasta.hide()
+        self.label_pasos.hide()
+        self.spinBox_desde.hide()
+        self.spinBox_hasta.hide()
+        self.spinBox_pasos.hide()
 
     def __cb_spice(self):
         path, _ = QFileDialog.getOpenFileName(filter="*.raw")
