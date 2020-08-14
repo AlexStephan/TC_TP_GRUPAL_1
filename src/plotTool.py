@@ -43,6 +43,8 @@ class PlotTool(QWidget, Ui_Form):
         self.setupUi(self)
         self.setWindowTitle("TP GRUPAL 1 - TEORÍA DE CIRCUITOS")
 
+        self.ingresandoHs = False
+
         self.graficoSuperior_Figure = Figure()
         self.graficoInferior_Figure = Figure()
         self.graficoSuperior_Canvas = FigureCanvas(self.graficoSuperior_Figure)
@@ -67,6 +69,9 @@ class PlotTool(QWidget, Ui_Form):
 
         self.borrarGraficos_PushButton.clicked.connect(self.__borrarGraficos)
         self.__borrarGraficos()
+
+        self.funcionTransferencia_PushButton.clicked.connect(self.__cb_Hs)
+        self.__habilita_deshabilita_Hs()
 
     def __add_plots(self, obj: DataFromFile,marker,legend):
         size=obj.number_of_plots()
@@ -96,6 +101,28 @@ class PlotTool(QWidget, Ui_Form):
         self.graficoInferior_Axis.plot(x,y, marker=marker, label=legend)
         self.graficoInferior_Canvas.draw()
         self.graficoInferior_Axis.legend()
+
+    def __cb_Hs(self):
+        self.ingresandoHs = not self.ingresandoHs
+        self.__habilita_deshabilita_Hs()
+
+    def __habilita_deshabilita_Hs(self):
+        if self.ingresandoHs:
+            self.__habilitarHs()
+        else:
+            self.__deshabilitarHs()
+
+    def __habilitarHs(self):
+        self.Numerador_LineEdit.show()
+        self.Denominador_LineEdit.show()
+        self.OK_Hs_PushButton.show()
+        self.line_2.show()
+
+    def __deshabilitarHs(self):
+        self.Numerador_LineEdit.hide()
+        self.Denominador_LineEdit.hide()
+        self.OK_Hs_PushButton.hide()
+        self.line_2.hide()
 
     def __cb_spice(self):
         path, _ = QFileDialog.getOpenFileName(filter="*.txt")
