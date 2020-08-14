@@ -1,4 +1,5 @@
 from src.backend.dataFromFile import DataFromFile
+import csv
 
 class CSVData(DataFromFile):
     def __init__(self):

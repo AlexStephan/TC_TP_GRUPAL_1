@@ -2,7 +2,6 @@ import ltspice
 import numpy as np
 from src.backend.dataFromFile import DataFromFile
 
-
 class LTSpiceData(DataFromFile):
     def __init__(self):
         self.path = ""
