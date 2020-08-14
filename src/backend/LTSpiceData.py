@@ -1,7 +1,5 @@
-import os
 import ltspice
 import numpy as np
-import matplotlib.pyplot as plt
 from src.backend.dataFromFile import DataFromFile
 
 
