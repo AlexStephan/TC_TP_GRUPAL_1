@@ -81,17 +81,13 @@ class PlotTool(QWidget, Ui_Form):
 
         self.funcionTransferencia_PushButton.clicked.connect(self.__cb_Hs)
         self.__habilita_deshabilita_Hs()
-
-        self.errprButton.clicked.connect(self.__cb_testing_error_window)
+        self.OK_Hs_PushButton.clicked.connect(self.__cb_Ok_Hs)
 
     def __error_message(self,description):
         self.errorBox.setWindowTitle("Error")
         self.errorBox.setIcon(self.errorBox.Information)
         self.errorBox.setText(description)
         self.errorBox.exec()
-
-    def __cb_testing_error_window(self):
-        self.__error_message("A LA GRANDE LE PUSE CUCA")
 
     def __add_plots_from_file(self, obj: DataFromFile,marker,legend):
         size=obj.number_of_plots()
@@ -159,6 +155,9 @@ class PlotTool(QWidget, Ui_Form):
         self.spinBox_hasta.hide()
         self.spinBox_pasos.hide()
 
+    def __cb_Ok_Hs(self):
+        print("henlo")
+
     #Spice
     def __cb_spice(self):
         path, _ = QFileDialog.getOpenFileName(filter="*.raw")
@@ -194,6 +193,8 @@ class PlotTool(QWidget, Ui_Form):
             self.__add_plots_from_file(data,Grafico.MEDIDO.value,"MEDIDO")
         else:
             print("Archivo inválido")
+
+    #Graficos
 
     def __cb_habilitarSegundoGrafico(self):
         if self.habilitarSegundoGrafico_CheckBox.isChecked():

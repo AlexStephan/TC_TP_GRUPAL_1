@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>998</width>
-    <height>644</height>
+    <height>740</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -221,13 +221,6 @@
         </size>
        </property>
       </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="errprButton">
-       <property name="text">
-        <string>TESTING ERROR WINDOWS</string>
-       </property>
-      </widget>
      </item>
     </layout>
    </item>
