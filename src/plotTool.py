@@ -314,7 +314,7 @@ class PlotTool(QWidget, Ui_Form):
         if den == []:
             return
 
-        self.Hs.load_Hs([1],[1,1])
+        self.Hs.load_Hs(num,den)
         self.Hs.set_log_domain(self.spinBox_desde.value(),
                                self.spinBox_hasta.value(),
                                self.spinBox_pasos.value())
