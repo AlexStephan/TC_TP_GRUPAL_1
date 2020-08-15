@@ -6,9 +6,9 @@ from sympy.parsing.sympy_parser import parse_expr
 class TransferFunction:
     def __init__(self):
 
-        self.isFunctionValid = True
-        self.isLinearValid = True
-        self.isLogValid = True
+        self.isFunctionValid = False
+        self.isLinearValid = False
+        self.isLogValid = False
 
         self.numerator = []
         self.denominator = []
@@ -50,10 +50,10 @@ class TransferFunction:
 
     def set_log_domain(self, min, max, num): #armo un dominio logaritmico en el tiempo
         if min <= max:
-            self.maxFreq = max
-            self.minFreq = min
+            self.maxFreq = 10**max
+            self.minFreq = 10**min
             self.numOfPoints = num
-            self.w_arr = np.geomspace(min, max, num)
+            self.w_arr = np.logspace(min, max, num)
             self.isLogValid = True
         else:
             self.isLogValid = False
