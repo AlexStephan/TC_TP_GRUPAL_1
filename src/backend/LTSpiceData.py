@@ -22,7 +22,7 @@ class LTSpiceData(DataFromFile):
         sim = self.loadFile(self.path)
         sim.parse()
         names = sim.getVariableNames()
-        names.pop()
+        names.pop(0)
         #print(names)
         return names
 
@@ -32,7 +32,6 @@ class LTSpiceData(DataFromFile):
         sim.parse()
         freq = sim.getFrequency()
         var = sim.getData(name)
-        print(3)
         var_amplitude = 20 * np.log10(np.abs(var))
         var_fase = np.angle(var, deg=True)
         return var_amplitude, var_fase

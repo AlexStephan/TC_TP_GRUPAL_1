@@ -5,6 +5,7 @@ from Lib.random import random
 # Qt Modules
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget
+from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtWidgets import QFileDialog
 from src.ui.tp1ui import Ui_Form
 
@@ -43,10 +44,12 @@ class PlotTool(QWidget, Ui_Form):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
         self.setWindowTitle("TP GRUPAL 1 - TEORÍA DE CIRCUITOS")
+        self.setWindowIcon(QtGui.QIcon('py.png'))
 
         self.LTSpice = LTSpiceData()
         self.ingresandoHs = False
         self.mostrarSp = False
+        self.errorBox = QtWidgets.QMessageBox()
 
         self.graficoSuperior_Figure = Figure()
         self.graficoInferior_Figure = Figure()
@@ -85,7 +88,10 @@ class PlotTool(QWidget, Ui_Form):
         print("placeholder. Nothing to see here")
 
     def __cb_testing_error_window(self):
-        self.__error_message("A LA GRANDE LE PUSE CUCA")
+        self.errorBox.setWindowTitle("Error")
+        self.errorBox.setIcon(self.errorBox.Information)
+        self.errorBox.setText("The document has been modified.");
+        self.errorBox.exec();
 
     def __add_plots_from_file(self, obj: DataFromFile,marker,legend):
         size=obj.number_of_plots()
@@ -155,12 +161,12 @@ class PlotTool(QWidget, Ui_Form):
 
     #Spice
     def __cb_spice(self):
-
         path, _ = QFileDialog.getOpenFileName(filter="*.raw")
         self.LTSpice.loadFile(path)
         if self.LTSpice.isValid():
             self.mostrarSp = not self.mostrarSp
             self.__habilita_deshabilita_Spice()
+            self.spice_List.clear()
             self.spice_List.addItems(self.LTSpice.getNames())
         else:
             print("Archivo inválido")
