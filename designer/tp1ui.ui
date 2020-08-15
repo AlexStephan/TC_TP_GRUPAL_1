@@ -208,6 +208,13 @@
        </property>
       </spacer>
      </item>
+     <item>
+      <widget class="QPushButton" name="errprButton">
+       <property name="text">
+        <string>TESTING ERROR WINDOWS</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>

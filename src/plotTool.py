@@ -73,6 +73,14 @@ class PlotTool(QWidget, Ui_Form):
         self.funcionTransferencia_PushButton.clicked.connect(self.__cb_Hs)
         self.__habilita_deshabilita_Hs()
 
+        self.errprButton.clicked.connect(self.__cb_testing_error_window)
+
+    def __error_message(self,description):
+        pass
+
+    def __cb_testing_error_window(self):
+        self.__error_message("A LA GRANDE LE PUSE CUCA")
+
     def __add_plots_from_file(self, obj: DataFromFile,marker,legend):
         size=obj.number_of_plots()
 

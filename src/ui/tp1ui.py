@@ -102,6 +102,9 @@ class Ui_Form(object):
         self.verticalLayout.addWidget(self.borrarGraficos_PushButton)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem1)
+        self.errprButton = QtWidgets.QPushButton(Form)
+        self.errprButton.setObjectName("errprButton")
+        self.verticalLayout.addWidget(self.errprButton)
         self.horizontalLayout.addLayout(self.verticalLayout)
         self.line = QtWidgets.QFrame(Form)
         self.line.setFrameShape(QtWidgets.QFrame.VLine)
@@ -188,6 +191,7 @@ class Ui_Form(object):
         self.spice_PushButton.setText(_translate("Form", "SPICE"))
         self.medicion_PushButton.setText(_translate("Form", "Medición (csv)"))
         self.borrarGraficos_PushButton.setText(_translate("Form", "BORRAR GRÁFICOS"))
+        self.errprButton.setText(_translate("Form", "TESTING ERROR WINDOWS"))
         self.label.setText(_translate("Form", "Plot Tool Grupo 2"))
 
 
