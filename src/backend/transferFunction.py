@@ -60,3 +60,15 @@ class TransferFunction:
 
     def get_aproximated_bode(self): # porque confiamos en Tobi <3// No confien pq es mas complicado de lo que pense xd
         pass
+
+    def get_output(self, input_expression):
+        if self.valid:
+            return ss.lsim(self.HS, U=input_expression(self.t_arr))
+        else:
+            return []
+    def get_input(self, input_expression):
+        if self.valid:
+            return input_expression(self.t_arr)
+        else:
+            return []
+

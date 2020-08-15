@@ -99,26 +99,33 @@ class PlotTool(QWidget, Ui_Form):
 
         # SEGUNDA VENTANA
         self.aBode_Figure = Figure()
+        self.aBode2_Figure = Figure()
         self.aIn_Figure = Figure()
         self.aOut_Figure = Figure()
         self.aBode_Canvas = FigureCanvas(self.aBode_Figure)
+        self.aBode2_Canvas= FigureCanvas(self.aBode2_Figure)
         self.aIn_Canvas = FigureCanvas(self.aIn_Figure)
         self.aOut_Canvas = FigureCanvas(self.aOut_Figure)
         self.aBode_Index = self.Analisis_Bode_stackedWidget.addWidget(self.aBode_Canvas)
+        self.aBode2_Index = self.Analisis_Bode2_stackedWidget.addWidget(self.aBode2_Canvas)
         self.aIn_Index = self.Analisis_Entrada_stackedWidget.addWidget(self.aIn_Canvas)
         self.aOut_Index = self.Analisis_Salida_stackedWidget.addWidget(self.aOut_Canvas)
         self.Analisis_Bode_stackedWidget.setCurrentIndex(self.aBode_Index)
+        self.Analisis_Bode2_stackedWidget.setCurrentIndex(self.aBode2_Index)
         self.Analisis_Entrada_stackedWidget.setCurrentIndex(self.aIn_Index)
         self.Analisis_Salida_stackedWidget.setCurrentIndex(self.aOut_Index)
 
         self.aBode_toolvar = NavigationToolbar(self.aBode_Canvas, self)
+        self.aBode2_toolvar = NavigationToolbar(self.aBode2_Canvas,self)
         self.aIn_toolvar = NavigationToolbar(self.aIn_Canvas, self)
         self.aOut_toolvar = NavigationToolbar(self.aOut_Canvas, self)
         self.Analisis_Bode_navtool.addWidget(self.aBode_toolvar)
+        self.Analisis_Bode2_navtool.addWidget(self.aBode2_toolvar)
         self.Analisis_Entrada_navtool.addWidget(self.aIn_toolvar)
         self.Analisis_Salida_navtool.addWidget(self.aOut_toolvar)
 
         self.aBode_Axis = self.aBode_Figure.add_subplot()
+        self.aBode2_Axis = self.aBode2_Figure.add_subplot()
         self.aIn_Axis = self.aIn_Figure.add_subplot()
         self.aOut_Axis = self.aOut_Figure.add_subplot()
 
@@ -150,7 +157,6 @@ class PlotTool(QWidget, Ui_Form):
         self.Analisis_Salida_stackedWidget.hide()
         self.Analisis_Salida_Borrar.hide()
         self.Analisis_Salida_texto.hide()
-        self.line_6.hide()
         self.Analisis_Entrada_texto.hide()
 
     def __entrada_salida_separadas(self):
@@ -161,7 +167,6 @@ class PlotTool(QWidget, Ui_Form):
         self.Analisis_Salida_stackedWidget.show()
         self.Analisis_Salida_Borrar.show()
         self.Analisis_Salida_texto.show()
-        self.line_6.show()
         self.Analisis_Entrada_texto.show()
 
     #   Limpieza graficos
@@ -170,6 +175,10 @@ class PlotTool(QWidget, Ui_Form):
         self.aBode_Axis.clear()
         self.aBode_Axis.grid()
         self.aBode_Canvas.draw()
+
+        self.aBode2_Axis.clear()
+        self.aBode2_Axis.grid()
+        self.aBode2_Canvas.draw()
 
     def __clean_In(self):
         self.aIn_Axis.clear()
@@ -200,15 +209,20 @@ class PlotTool(QWidget, Ui_Form):
             # TODO: no llamar aca a las funciones de ploteo, sino mediante otra que distinga segun
             # el modo de grafico seleccionado (superior, inferior o "bode")
 
-            # self.__add_plot_superior(frecuencia,amplitud,Grafico.TEORICO.value,"TEORICO")
-            # self.__add_plot_inferior(frecuencia,fase,Grafico.TEORICO.value,"TEORICO")
+            self.__add_Analisis_plot_Bode1(frecuencia,amplitud,Grafico.TEORICO.value,"TEORICO")
+            self.__add_Analisis_plot_Bode2(frecuencia,fase,Grafico.TEORICO.value,"TEORICO")
         else:
             self.__error_message("No pudo calcularse la funcion de transferencia")
 
-        def __add_Analisis_plot_Bode(self, x, y, marker, legend):
-            self.aBode_Axis.plot(x, y, marker=marker, label=legend)
+        def __add_Analisis_plot_Bode1(self, x, y, marker, legend):
+            self.aBode_Axis.plot(x, y, marker=marker)
             self.aBode_Canvas.draw()
             self.aBode_Axis.legend()
+
+        def __add_Analisis_plot_Bode2(self, x, y, marker, legend):
+            self.aBode2_Axis.plot(x, y, marker=marker)
+            self.aBode2_Canvas.draw()
+            self.aBode2_Axis.legend()
 
     # PRIMERA VENTANA
 
