@@ -27,7 +27,7 @@ import sympy as sp
 from sympy.parsing.sympy_parser import parse_expr
 
 # My Own Modules
-
+from src.backend.CSVData import CSVData
 from src.backend.dataFromFile import DataFromFile
 from src.backend.LTSpiceData import LTSpiceData
 from src.backend.transferFunction import TransferFunction
@@ -55,6 +55,7 @@ class PlotTool(QWidget, Ui_Form):
         # PRIMER VENTANA
 
         self.LTSpice = LTSpiceData()
+        self.CSV = CSVData()
         self.ingresandoHs = False
         self.mostrarSp = False
         self.errorBox = QtWidgets.QMessageBox()
@@ -305,10 +306,8 @@ class PlotTool(QWidget, Ui_Form):
                                self.spinBox_pasos.value())
         if self.Hs.is_valid():
             frecuencia,amplitud,fase=self.Hs.get_bode()
-            # TODO: no llamar aca a las funciones de ploteo, sino mediante otra que distinga segun
-            # el modo de grafico seleccionado (superior, inferior o "bode")
-            self.__add_plot_superior(frecuencia,amplitud,Grafico.TEORICO.value,"TEORICO")
-            self.__add_plot_inferior(frecuencia,fase,Grafico.TEORICO.value,"TEORICO")
+            y = [amplitud, fase]
+            self.__add_plots_from_file(frecuencia,y,2,Grafico.TEORICO.value,"TEORICO")
         else:
             self.__error_message("No pudo calcularse la funcion de transferencia")
 
@@ -375,16 +374,18 @@ class PlotTool(QWidget, Ui_Form):
     #Medicion
     def __cb_medido(self):
         path, _ = QFileDialog.getOpenFileName(filter="*.csv")
+        self.CSV.loadFile(path)
+        if self.CSV.isValid():
+            freq, amp, phase = self.CSV.getGraph()
+            y = [amp, phase]
+            print(3)
+            self.__add_plots_from_file(freq, y, 2, Grafico.MEDIDO.value, "MEDIDO")
 
-        data = DataFromFile()
-        data.load_file(path)
-        if data.is_valid():
-            self.__add_plots_from_file(data,Grafico.MEDIDO.value,"MEDIDO")
         else:
             self.__error_message("Archivo Inválido")
 
-    #Graficos
 
+    #Graficos
     def __cb_habilitarSegundoGrafico(self):
         if self.habilitarSegundoGrafico_CheckBox.isChecked():
             self.__habilitarSegundoGrafico()

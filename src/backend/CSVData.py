@@ -40,10 +40,11 @@ class CSVData(DataFromFile):
 
     def getGraph(self):
         strvar = self.getColumnList(0)
-        var1 = self.convert2Float(strvar)
+        freq = self.convert2Float(strvar)
         strvar = self.getColumnList(1)
-        var2 = self.convert2Float(strvar)
+        amp = self.convert2Float(strvar)
         strvar = self.getColumnList(2)
-        var3 = self.convert2Float(strvar)
-        return var1, var2, var3
+        phase = self.convert2Float(strvar)
+        print(2)
+        return freq, amp, phase
 
