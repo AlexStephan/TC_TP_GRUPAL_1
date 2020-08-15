@@ -127,6 +127,10 @@ class PlotTool(QWidget, Ui_Form):
         self.__cb_checkear_entrada_salida_separados()
         self.__clean_Bode()
 
+        self.Analisis_Bode_Borrar.clicked.connect(self.__clean_Bode)
+        self.Analisis_Entrada_Borrar.clicked.connect(self.__clean_In)
+        self.Analisis_Salida_Borrar.clicked.connect(self.__clean_Out)
+
     # SEGUNDA VENTANA
 
     #   Entradas y salidas juntas o separadas
@@ -175,6 +179,35 @@ class PlotTool(QWidget, Ui_Form):
         self.aOut_Axis.clear()
         self.aOut_Axis.grid()
         self.aOut_Canvas.draw()
+
+    # Ingreso del usuario
+
+    def __cb_analisis_ingreso_Bode(self):
+        num = self.__parsing_Hs(self.Analisis_Bode_Num_lineEdit.text(),"NUMERADOR")
+        if num == []:
+            return
+        den = self.__parsing_Hs(self.Analisis_Bode_Den_lineEdit.text(),"DENOMINADOR")
+        if den == []:
+            return
+
+        self.Hs2.load_Hs(num,den)
+        self.Hs2.set_log_domain(self.Analisis_Bode_Desde_spinBox.value(),
+                               self.Analisis_Bode_Hasta_spinBox.value(),
+                               self.Analisis_Bode_Pasos_spinBox.value())
+        if self.Hs2.is_valid():
+            frecuencia,amplitud,fase=self.Hs2.get_bode()
+            # TODO: no llamar aca a las funciones de ploteo, sino mediante otra que distinga segun
+            # el modo de grafico seleccionado (superior, inferior o "bode")
+
+            # self.__add_plot_superior(frecuencia,amplitud,Grafico.TEORICO.value,"TEORICO")
+            # self.__add_plot_inferior(frecuencia,fase,Grafico.TEORICO.value,"TEORICO")
+        else:
+            self.__error_message("No pudo calcularse la funcion de transferencia")
+
+        def __add_Analisis_plot_Bode(self, x, y, marker, legend):
+            self.aBode_Axis.plot(x, y, marker=marker, label=legend)
+            self.aBode_Canvas.draw()
+            self.aBode_Axis.legend()
 
     # PRIMERA VENTANA
 
