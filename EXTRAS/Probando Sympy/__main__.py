@@ -19,18 +19,14 @@ from sympy.polys.polytools import Poly
 
 if __name__ == '__main__':
     try:
-        num = sp.parsing.sympy_parser.parse_expr("(s+2)*(s+3)")
+        num = sp.parsing.sympy_parser.parse_expr("2*s")
         print(num)
 
         s = sp.symbols('s')
-        t = sp.symbols('t')
-        print(num.subs(s, 4))
-        lol = Poly(num, s)
-        print(lol)
 
-        hoh = s ** 2 + 5
-        ha = sp.lambdify(s, hoh, modules=['numpy'])
-        hoh.as_poly()
+        print(num.subs(s, 4))
+        numx = sp.lambdify(s, num, modules=['numpy'])
+        print(numx(4))
         try:
             print(num.as_poly().all_coeffs())
         except:
