@@ -591,6 +591,19 @@
                </property>
               </widget>
              </item>
+             <item>
+              <spacer name="verticalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
             </layout>
            </item>
           </layout>
@@ -603,256 +616,298 @@
           </widget>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_16">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_17">
-             <item>
-              <widget class="QLabel" name="Analisis_Bode_texto">
-               <property name="text">
-                <string>Respuesta en frecuencia</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="Analisis_Bode_Borrar">
-               <property name="text">
-                <string>Borrar</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QStackedWidget" name="Analisis_Bode_stackedWidget">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <widget class="QWidget" name="page_5"/>
-             <widget class="QWidget" name="page_6"/>
-            </widget>
-           </item>
-           <item>
-            <widget class="QFrame" name="frame_3">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>60</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_13">
-              <item>
-               <layout class="QHBoxLayout" name="Analisis_Bode_navtool">
-                <property name="sizeConstraint">
-                 <enum>QLayout::SetDefaultConstraint</enum>
-                </property>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="Line" name="line_4">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_12">
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_17">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_19">
-             <item>
-              <widget class="QLabel" name="Analisis_Entrada_texto">
-               <property name="text">
-                <string>Entrada</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="Analisis_Entrada_Borrar">
-               <property name="text">
-                <string>Borrar</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-           <item>
-            <widget class="QStackedWidget" name="Analisis_Entrada_stackedWidget">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <widget class="QWidget" name="page_9"/>
-             <widget class="QWidget" name="page_10"/>
-            </widget>
-           </item>
-           <item>
-            <widget class="QFrame" name="frame_4">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>60</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_15">
-              <item>
-               <layout class="QHBoxLayout" name="Analisis_Entrada_navtool">
-                <property name="sizeConstraint">
-                 <enum>QLayout::SetDefaultConstraint</enum>
-                </property>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <widget class="Line" name="line_6">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
+          <widget class="QTabWidget" name="tabWidget_2">
+           <property name="currentIndex">
+            <number>0</number>
            </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QVBoxLayout" name="verticalLayout_18">
-           <item>
-            <layout class="QHBoxLayout" name="horizontalLayout_18">
+           <widget class="QWidget" name="tab_5">
+            <attribute name="title">
+             <string>Bode</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_39">
              <item>
-              <widget class="QLabel" name="Analisis_Salida_texto">
-               <property name="text">
-                <string>Salida</string>
+              <layout class="QHBoxLayout" name="horizontalLayout_17">
+               <item>
+                <widget class="QLabel" name="Analisis_Bode_texto">
+                 <property name="text">
+                  <string>Respuesta en frecuencia</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="Analisis_Bode_Borrar">
+                 <property name="text">
+                  <string>Borrar</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QStackedWidget" name="Analisis_Bode_stackedWidget">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
                </property>
+               <widget class="QWidget" name="page_5"/>
+               <widget class="QWidget" name="page_6"/>
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
+              <widget class="QFrame" name="frame_3">
+               <property name="minimumSize">
                 <size>
-                 <width>40</width>
-                 <height>20</height>
+                 <width>0</width>
+                 <height>60</height>
                 </size>
                </property>
-              </spacer>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_13">
+                <item>
+                 <layout class="QHBoxLayout" name="Analisis_Bode_navtool">
+                  <property name="sizeConstraint">
+                   <enum>QLayout::SetDefaultConstraint</enum>
+                  </property>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="Analisis_Salida_Borrar">
-               <property name="text">
-                <string>Borrar</string>
+              <widget class="QStackedWidget" name="Analisis_Bode2_stackedWidget">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
                </property>
+               <widget class="QWidget" name="page_27"/>
+               <widget class="QWidget" name="page_28"/>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="frame_11">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>60</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_38">
+                <item>
+                 <layout class="QHBoxLayout" name="Analisis_Bode2_navtool">
+                  <property name="sizeConstraint">
+                   <enum>QLayout::SetDefaultConstraint</enum>
+                  </property>
+                 </layout>
+                </item>
+               </layout>
               </widget>
              </item>
             </layout>
-           </item>
-           <item>
-            <widget class="QStackedWidget" name="Analisis_Salida_stackedWidget">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <widget class="QWidget" name="page_11"/>
-             <widget class="QWidget" name="page_12"/>
-            </widget>
-           </item>
-           <item>
-            <widget class="QFrame" name="frame_5">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>60</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::StyledPanel</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-             <layout class="QHBoxLayout" name="horizontalLayout_16">
-              <item>
-               <layout class="QHBoxLayout" name="Analisis_Salida_navtool">
-                <property name="sizeConstraint">
-                 <enum>QLayout::SetDefaultConstraint</enum>
-                </property>
-               </layout>
-              </item>
-             </layout>
-            </widget>
-           </item>
-          </layout>
+           </widget>
+           <widget class="QWidget" name="tab_6">
+            <attribute name="title">
+             <string>Entradas y salidas</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_16">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_17">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_19">
+                 <item>
+                  <widget class="QLabel" name="Analisis_Entrada_texto">
+                   <property name="text">
+                    <string>Entrada</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_3">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="Analisis_Entrada_Borrar">
+                   <property name="text">
+                    <string>Borrar</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QStackedWidget" name="Analisis_Entrada_stackedWidget">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <widget class="QWidget" name="page_9"/>
+                 <widget class="QWidget" name="page_10"/>
+                </widget>
+               </item>
+               <item>
+                <widget class="QFrame" name="frame_4">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>60</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_15">
+                  <item>
+                   <layout class="QHBoxLayout" name="Analisis_Entrada_navtool">
+                    <property name="sizeConstraint">
+                     <enum>QLayout::SetDefaultConstraint</enum>
+                    </property>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_18">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_18">
+                 <item>
+                  <widget class="QLabel" name="Analisis_Salida_texto">
+                   <property name="text">
+                    <string>Salida</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_2">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="Analisis_Salida_Borrar">
+                   <property name="text">
+                    <string>Borrar</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="QStackedWidget" name="Analisis_Salida_stackedWidget">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <widget class="QWidget" name="page_11"/>
+                 <widget class="QWidget" name="page_12"/>
+                </widget>
+               </item>
+               <item>
+                <widget class="QFrame" name="frame_5">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>60</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="frameShape">
+                  <enum>QFrame::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_16">
+                  <item>
+                   <layout class="QHBoxLayout" name="Analisis_Salida_navtool">
+                    <property name="sizeConstraint">
+                     <enum>QLayout::SetDefaultConstraint</enum>
+                    </property>
+                   </layout>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </widget>
          </item>
         </layout>
        </item>
