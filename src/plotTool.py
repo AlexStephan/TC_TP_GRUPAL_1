@@ -52,6 +52,8 @@ class PlotTool(QWidget, Ui_Form):
         self.setWindowTitle("TP GRUPAL 1 - TEORÍA DE CIRCUITOS")
         self.setWindowIcon(QtGui.QIcon('py.png'))
 
+        # PRIMER VENTANA
+
         self.LTSpice = LTSpiceData()
         self.ingresandoHs = False
         self.mostrarSp = False
@@ -60,7 +62,8 @@ class PlotTool(QWidget, Ui_Form):
         self.Hs = TransferFunction()
         self.HsExpressionInstructions = "FUNCIONES EN FRECUENCIA COMPLEJA:\nVariable:\ts\n" \
                                         "Producto:\t*\nPotencia:\t**\nNo se admiten productos implícitos (ej: (2+s)(3+s))"
-
+        self.InExpressionInstructions = "FUNCIONES EN EL TIEMPO:\nVariable:\tt\n" \
+                                        "Producto:\t*\nPotencia:\t**\nNo se admiten productos implícitos (ej: (2+t)(3+t))"
         self.graficoSuperior_Figure = Figure()
         self.graficoInferior_Figure = Figure()
         self.graficoSuperior_Canvas = FigureCanvas(self.graficoSuperior_Figure)
@@ -92,6 +95,89 @@ class PlotTool(QWidget, Ui_Form):
         self.funcionTransferencia_PushButton.clicked.connect(self.__cb_Hs)
         self.__habilita_deshabilita_Hs()
         self.OK_Hs_PushButton.clicked.connect(self.__cb_Ok_Hs)
+
+        # SEGUNDA VENTANA
+        self.aBode_Figure = Figure()
+        self.aIn_Figure = Figure()
+        self.aOut_Figure = Figure()
+        self.aBode_Canvas = FigureCanvas(self.aBode_Figure)
+        self.aIn_Canvas = FigureCanvas(self.aIn_Figure)
+        self.aOut_Canvas = FigureCanvas(self.aOut_Figure)
+        self.aBode_Index = self.Analisis_Bode_stackedWidget.addWidget(self.aBode_Canvas)
+        self.aIn_Index = self.Analisis_Entrada_stackedWidget.addWidget(self.aIn_Canvas)
+        self.aOut_Index = self.Analisis_Salida_stackedWidget.addWidget(self.aOut_Canvas)
+        self.Analisis_Bode_stackedWidget.setCurrentIndex(self.aBode_Index)
+        self.Analisis_Entrada_stackedWidget.setCurrentIndex(self.aIn_Index)
+        self.Analisis_Salida_stackedWidget.setCurrentIndex(self.aOut_Index)
+
+        self.aBode_toolvar = NavigationToolbar(self.aBode_Canvas, self)
+        self.aIn_toolvar = NavigationToolbar(self.aIn_Canvas, self)
+        self.aOut_toolvar = NavigationToolbar(self.aOut_Canvas, self)
+        self.Analisis_Bode_navtool.addWidget(self.aBode_toolvar)
+        self.Analisis_Entrada_navtool.addWidget(self.aIn_toolvar)
+        self.Analisis_Salida_navtool.addWidget(self.aOut_toolvar)
+
+        self.aBode_Axis = self.aBode_Figure.add_subplot()
+        self.aIn_Axis = self.aIn_Figure.add_subplot()
+        self.aOut_Axis = self.aOut_Figure.add_subplot()
+
+        self.Hs2 = TransferFunction()
+
+        self.entrada_salida_separadas_checkBox.stateChanged.connect(self.__cb_checkear_entrada_salida_separados)
+        self.__cb_checkear_entrada_salida_separados()
+
+
+
+    # SEGUNDA VENTANA
+
+    #   Entradas y salidas juntas o separadas
+
+    def __cb_checkear_entrada_salida_separados(self):
+        if self.entrada_salida_separadas_checkBox.isChecked():
+            self.__entrada_salida_separadas()
+        else:
+            self.__entrada_salida_juntas()
+
+    def __entrada_salida_juntas(self):
+        self.__clean_In()
+        self.__clean_Out()
+
+        self.frame_5.hide()
+        self.Analisis_Salida_stackedWidget.hide()
+        self.Analisis_Salida_Borrar.hide()
+        self.Analisis_Salida_texto.hide()
+        self.line_6.hide()
+        self.Analisis_Entrada_texto.hide()
+
+    def __entrada_salida_separadas(self):
+        self.__clean_In()
+        self.__clean_Out()
+
+        self.frame_5.show()
+        self.Analisis_Salida_stackedWidget.show()
+        self.Analisis_Salida_Borrar.show()
+        self.Analisis_Salida_texto.show()
+        self.line_6.show()
+        self.Analisis_Entrada_texto.show()
+
+    #   Limpieza graficos
+
+    def __clean_Bode(self):
+        self.aBode_Axis.clear()
+        self.aBode_Axis.grid()
+        self.aBode_Canvas.draw()
+
+    def __clean_In(self):
+        self.aIn_Axis.clear()
+        self.aIn_Axis.grid()
+        self.aIn_Canvas.draw()
+
+    def __clean_Out(self):
+        self.aOut_Axis.clear()
+        self.aOut_Axis.grid()
+        self.aOut_Canvas.draw()
+
+    # PRIMERA VENTANA
 
     def __error_message(self,description):
         self.errorBox.setWindowTitle("Error")
