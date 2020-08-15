@@ -24,9 +24,8 @@ class CSVData(DataFromFile):
     def convert2Float(strlist):
         floatlist = []
         for x in strlist:
-            for y in x:
-                f = float(y)
-                floatlist.append(f)
+            f = float(x)
+            floatlist.append(f)
         return floatlist
 
     def getColumnList(self, colnum):
