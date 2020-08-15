@@ -30,6 +30,7 @@ from sympy.parsing.sympy_parser import parse_expr
 
 from src.backend.dataFromFile import DataFromFile
 from src.backend.LTSpiceData import LTSpiceData
+from src.backend.transferFunction import TransferFunction
 
 
 class Entrada(Enum):
@@ -56,6 +57,7 @@ class PlotTool(QWidget, Ui_Form):
         self.mostrarSp = False
         self.errorBox = QtWidgets.QMessageBox()
 
+        self.Hs = TransferFunction()
         self.HsExpressionInstructions = "FUNCIONES EN FRECUENCIA COMPLEJA:\nVariable:\ts\n" \
                                         "Producto:\t*\nPotencia:\t**\nNo se admiten productos implícitos (ej: (2+s)(3+s))"
 
@@ -164,24 +166,50 @@ class PlotTool(QWidget, Ui_Form):
         self.spinBox_pasos.hide()
 
     def __cb_Ok_Hs(self):
+        num = self.__parsing_Hs(self.Numerador_LineEdit.text(),"NUMERADOR")
+        if num == []:
+            return
+        den = self.__parsing_Hs(self.Denominador_LineEdit.text(),"DENOMINADOR")
+        if den == []:
+            return
+
+        self.Hs.load_Hs(num,den)
+        self.Hs.set_log_domain(self.spinBox_desde.value(),
+                               self.spinBox_hasta.value(),
+                               self.spinBox_pasos.value())
+        if self.Hs.is_valid():
+            frecuencia,amplitud,fase=self.Hs.get_bode()
+            self.__add_plot_superior(frecuencia,amplitud,Grafico.TEORICO.value,"TEORICO")
+            self.__add_plot_inferior(frecuencia,fase,Grafico.TEORICO.value,"TEORICO")
+        else:
+            self.__error_message("No pudo calcularse la funcion de transferencia")
+
+
+
+    def __parsing_Hs(self,string,description):
         s = sp.symbols('s')
         try:
-            num = parse_expr(self.Numerador_LineEdit.text())
+            pol = parse_expr(string)
         except:
-            self.__error_message("Se ingresó una expresión inválida en el Numerador\n\n" + self.HsExpressionInstructions)
-            return
+            self.__error_message("Se ingresó una expresión inválida en " + description + "\n\n"
+                                 + self.HsExpressionInstructions)
+            return []
 
-        try:
-            num_s = sp.lambdify(s, num, modules=['numpy'])
-        except:
-            self.__error_message("La expresión del numerador no es monoevaluada en s")
-
-        try:
-            num_coeff = num.as_poly().all_coeffs()
-        except:
-            self.__error_message("La expresión ingresada en el Numerador no es un polinomio")
-            return
-
+        # print(pol.free_symbols)
+        if pol.free_symbols == {s}:
+            try:
+                pol_coeff = pol.as_poly().all_coeffs()
+            except:
+                self.__error_message("La expresión ingresada en " + description + " no es un polinomio")
+                return []
+        elif pol.free_symbols == set():
+            pol_coeff = []
+            pol_coeff.append(pol.subs(s,0))
+        else:
+            self.__error_message(description + " no es una funcion monoevaluada en s")
+            return []
+        print(pol_coeff)
+        return pol_coeff
 
     #Spice
     def __cb_spice(self):

@@ -15,7 +15,7 @@ class TransferFunction:
         return True
 
     def get_bode(self): # tanto amplitud como fase, para hacer mas facil
-        pass
+        return [1,10,100,1000],[0,0,-3,-6],[0,0,45,90]
 
     def get_aproximated_bode(self): # porque confiamos en Tobi <3
         pass
