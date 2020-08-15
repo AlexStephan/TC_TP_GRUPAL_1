@@ -61,7 +61,7 @@ class PlotTool(QWidget, Ui_Form):
         self.graficoInferior_StackedWidget.setCurrentIndex(self.graficoInferior_Index)
 
         self.toolbarSuperior = NavigationToolbar(self.graficoSuperior_Canvas, self)
-        self.toolbarInferior = NavigationToolbar(self.graficoInferior_Canvas, self) #Codigo Magico Gian
+        self.toolbarInferior = NavigationToolbar(self.graficoInferior_Canvas, self)  # Codigo Magico Gian
         self.navigation1.addWidget(self.toolbarSuperior)
         self.navigation2.addWidget(self.toolbarInferior)
 
