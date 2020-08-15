@@ -89,26 +89,36 @@ class PlotTool(QWidget, Ui_Form):
         self.errorBox.setText(description)
         self.errorBox.exec()
 
-    def __add_plots_from_file(self, obj: DataFromFile,marker,legend):
-        size=obj.number_of_plots()
+    def __add_plots_from_file(self,x, y, size,marker,legend):
 
         if self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.SUP.value:
             for index in range(size):
-                x, y = obj.get_plot(index)
-                self.__add_plot_superior(x, y,marker,legend)
+                if size > 1:
+                    yaux = y[index]
+                else:
+                    yaux = y
+                self.__add_plot_superior(x, yaux,marker,legend)
         elif self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.INF.value:
             for index in range(size):
-                x, y = obj.get_plot(index)
-                self.__add_plot_inferior(x, y,marker,legend)
+                if size > 1:
+                    yaux = y[index]
+                else:
+                    yaux = y
+                self.__add_plot_inferior(x, yaux,marker,legend)
         elif self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.BODE.value:
             for index in range(size):
-                x, y = obj.get_plot(index)
-                if index % 2 == 0:
-                    self.__add_plot_superior(x, y,marker,legend)
+                if size > 1:
+                    yaux = y[index]
                 else:
-                    self.__add_plot_inferior(x, y,marker,legend)
+                    yaux = y
+                if index % 2 == 0:
+                    self.__add_plot_superior(x, yaux,marker,legend)
+                else:
+                    self.__add_plot_inferior(x, yaux,marker,legend)
 
     def __add_plot_superior(self,x,y,marker,legend):
+        print(y)
+        #print(x)
         self.graficoSuperior_Axis.plot(x,y, marker=marker, label=legend)
         self.graficoSuperior_Canvas.draw()
         self.graficoSuperior_Axis.legend()
@@ -163,12 +173,14 @@ class PlotTool(QWidget, Ui_Form):
         path, _ = QFileDialog.getOpenFileName(filter="*.raw")
         self.LTSpice.loadFile(path)
         if self.LTSpice.isValid():
-            self.mostrarSp = not self.mostrarSp
-            self.__habilita_deshabilita_Spice()
             self.spice_List.clear()
+            if not self.mostrarSp:
+                self.mostrarSp = not self.mostrarSp
+
+            self.__habilita_deshabilita_Spice()
             self.spice_List.addItems(self.LTSpice.getNames())
         else:
-            print("Archivo inválido")
+            self.__error_message("Archivo Inválido")
 
     def __habilita_deshabilita_Spice(self):
         if self.mostrarSp:
@@ -177,10 +189,16 @@ class PlotTool(QWidget, Ui_Form):
             self.spice_List.hide()
 
     def __spice_Plot(self):
-        item = self.spice_List.currentItem().text()
-        x,y = self.LTSpice.getGraph(item)
-        self.__add_plot_superior(x,y,Grafico.LTSPICE.value,"SIMULADO")
+        if  self.LTSpice.getMode() == 'AC':
+            item = self.spice_List.currentItem().text()
+            amp,phase,x = self.LTSpice.getGraph(item)
+            y = [amp,  phase]
+            self.__add_plots_from_file(x,y,2,Grafico.LTSPICE.value,"SIMULADO")
 
+        elif self.LTSpice.getMode() == 'Transient':
+            item = self.spice_List.currentItem().text()
+            x, y = self.LTSpice.getGraph(item)
+            self.__add_plots_from_file(x, y, 1, Grafico.LTSPICE.value, "SIMULADO")
 
 
     #Medicion
@@ -192,7 +210,7 @@ class PlotTool(QWidget, Ui_Form):
         if data.is_valid():
             self.__add_plots_from_file(data,Grafico.MEDIDO.value,"MEDIDO")
         else:
-            print("Archivo inválido")
+            self.__error_message("Archivo Inválido")
 
     #Graficos
 
