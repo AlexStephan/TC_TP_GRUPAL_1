@@ -1,5 +1,7 @@
 import numpy as np
 import scipy.signal as ss
+import sympy as sp
+from sympy.parsing.sympy_parser import parse_expr
 
 class TransferFunction:
     def __init__(self):
@@ -17,7 +19,8 @@ class TransferFunction:
         self.minFreq = 0
         self.numOfPoints = 0
 
-        self.xAxis = []
+        self.w_arr = []
+        self.t_arr = []
 
         self.bode = []
         self.idealBode = []
@@ -39,7 +42,7 @@ class TransferFunction:
             self.maxFreq = max
             self.minFreq = min
             self.numOfPoints = num
-            self.xAxis = np.linspace(min, max, num)
+            self.t_arr = np.linspace(min, max, num)
         else:
             self.valid = False
 
@@ -48,7 +51,7 @@ class TransferFunction:
             self.maxFreq = max
             self.minFreq = min
             self.numOfPoints = num
-            self.xAxis = np.geomspace(min, max, num)
+            self.w_arr = np.geomspace(min, max, num)
         else:
             self.valid = False
 
@@ -56,7 +59,7 @@ class TransferFunction:
         return self.valid
 
     def get_bode(self): # tanto amplitud como fase, para hacer mas facil
-        self.bode = ss.bode(self.HS, self.xAxis)
+        self.bode = ss.bode(self.HS, self.w_arr)
 
     def get_aproximated_bode(self): # porque confiamos en Tobi <3// No confien pq es mas complicado de lo que pense xd
         pass
