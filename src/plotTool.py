@@ -62,7 +62,8 @@ class PlotTool(QWidget, Ui_Form):
         self.Hs = TransferFunction()
         self.HsExpressionInstructions = "FUNCIONES EN FRECUENCIA COMPLEJA:\nVariable:\ts\n" \
                                         "Producto:\t*\nPotencia:\t**\nNo se admiten productos implícitos (ej: (2+s)(3+s))"
-
+        self.InExpressionInstructions = "FUNCIONES EN EL TIEMPO:\nVariable:\tt\n" \
+                                        "Producto:\t*\nPotencia:\t**\nNo se admiten productos implícitos (ej: (2+t)(3+t))"
         self.graficoSuperior_Figure = Figure()
         self.graficoInferior_Figure = Figure()
         self.graficoSuperior_Canvas = FigureCanvas(self.graficoSuperior_Figure)
@@ -119,6 +120,64 @@ class PlotTool(QWidget, Ui_Form):
         self.aBode_Axis = self.aBode_Figure.add_subplot()
         self.aIn_Axis = self.aIn_Figure.add_subplot()
         self.aOut_Axis = self.aOut_Figure.add_subplot()
+
+        self.Hs2 = TransferFunction()
+
+        self.entrada_salida_separadas_checkBox.stateChanged.connect(self.__cb_checkear_entrada_salida_separados)
+        self.__cb_checkear_entrada_salida_separados()
+
+
+
+    # SEGUNDA VENTANA
+
+    #   Entradas y salidas juntas o separadas
+
+    def __cb_checkear_entrada_salida_separados(self):
+        if self.entrada_salida_separadas_checkBox.isChecked():
+            self.__entrada_salida_separadas()
+        else:
+            self.__entrada_salida_juntas()
+
+    def __entrada_salida_juntas(self):
+        self.__clean_In()
+        self.__clean_Out()
+
+        self.frame_5.hide()
+        self.Analisis_Salida_stackedWidget.hide()
+        self.Analisis_Salida_Borrar.hide()
+        self.Analisis_Salida_texto.hide()
+        self.line_6.hide()
+        self.Analisis_Entrada_texto.hide()
+
+    def __entrada_salida_separadas(self):
+        self.__clean_In()
+        self.__clean_Out()
+
+        self.frame_5.show()
+        self.Analisis_Salida_stackedWidget.show()
+        self.Analisis_Salida_Borrar.show()
+        self.Analisis_Salida_texto.show()
+        self.line_6.show()
+        self.Analisis_Entrada_texto.show()
+
+    #   Limpieza graficos
+
+    def __clean_Bode(self):
+        self.aBode_Axis.clear()
+        self.aBode_Axis.grid()
+        self.aBode_Canvas.draw()
+
+    def __clean_In(self):
+        self.aIn_Axis.clear()
+        self.aIn_Axis.grid()
+        self.aIn_Canvas.draw()
+
+    def __clean_Out(self):
+        self.aOut_Axis.clear()
+        self.aOut_Axis.grid()
+        self.aOut_Canvas.draw()
+
+    # PRIMERA VENTANA
 
     def __error_message(self,description):
         self.errorBox.setWindowTitle("Error")
