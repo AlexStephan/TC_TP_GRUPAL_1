@@ -189,6 +189,8 @@ class PlotTool(QWidget, Ui_Form):
                                self.spinBox_pasos.value())
         if self.Hs.is_valid():
             frecuencia,amplitud,fase=self.Hs.get_bode()
+            # TODO: no llamar aca a las funciones de ploteo, sino mediante otra que distinga segun
+            # el modo de grafico seleccionado (superior, inferior o "bode")
             self.__add_plot_superior(frecuencia,amplitud,Grafico.TEORICO.value,"TEORICO")
             self.__add_plot_inferior(frecuencia,fase,Grafico.TEORICO.value,"TEORICO")
         else:
@@ -218,7 +220,7 @@ class PlotTool(QWidget, Ui_Form):
         else:
             self.__error_message(description + " no es una funcion monoevaluada en s")
             return []
-        print(pol_coeff)
+        # print(pol_coeff)
         return pol_coeff
 
     #Spice
