@@ -30,6 +30,7 @@ from sympy.parsing.sympy_parser import parse_expr
 
 from src.backend.dataFromFile import DataFromFile
 from src.backend.LTSpiceData import LTSpiceData
+from src.backend.transferFunction import TransferFunction
 
 
 class Entrada(Enum):
@@ -51,14 +52,18 @@ class PlotTool(QWidget, Ui_Form):
         self.setWindowTitle("TP GRUPAL 1 - TEORÍA DE CIRCUITOS")
         self.setWindowIcon(QtGui.QIcon('py.png'))
 
+        # PRIMER VENTANA
+
         self.LTSpice = LTSpiceData()
         self.ingresandoHs = False
         self.mostrarSp = False
         self.errorBox = QtWidgets.QMessageBox()
 
+        self.Hs = TransferFunction()
         self.HsExpressionInstructions = "FUNCIONES EN FRECUENCIA COMPLEJA:\nVariable:\ts\n" \
                                         "Producto:\t*\nPotencia:\t**\nNo se admiten productos implícitos (ej: (2+s)(3+s))"
-
+        self.InExpressionInstructions = "FUNCIONES EN EL TIEMPO:\nVariable:\tt\n" \
+                                        "Producto:\t*\nPotencia:\t**\nNo se admiten productos implícitos (ej: (2+t)(3+t))"
         self.graficoSuperior_Figure = Figure()
         self.graficoInferior_Figure = Figure()
         self.graficoSuperior_Canvas = FigureCanvas(self.graficoSuperior_Figure)
@@ -91,32 +96,124 @@ class PlotTool(QWidget, Ui_Form):
         self.__habilita_deshabilita_Hs()
         self.OK_Hs_PushButton.clicked.connect(self.__cb_Ok_Hs)
 
+        # SEGUNDA VENTANA
+        self.aBode_Figure = Figure()
+        self.aIn_Figure = Figure()
+        self.aOut_Figure = Figure()
+        self.aBode_Canvas = FigureCanvas(self.aBode_Figure)
+        self.aIn_Canvas = FigureCanvas(self.aIn_Figure)
+        self.aOut_Canvas = FigureCanvas(self.aOut_Figure)
+        self.aBode_Index = self.Analisis_Bode_stackedWidget.addWidget(self.aBode_Canvas)
+        self.aIn_Index = self.Analisis_Entrada_stackedWidget.addWidget(self.aIn_Canvas)
+        self.aOut_Index = self.Analisis_Salida_stackedWidget.addWidget(self.aOut_Canvas)
+        self.Analisis_Bode_stackedWidget.setCurrentIndex(self.aBode_Index)
+        self.Analisis_Entrada_stackedWidget.setCurrentIndex(self.aIn_Index)
+        self.Analisis_Salida_stackedWidget.setCurrentIndex(self.aOut_Index)
+
+        self.aBode_toolvar = NavigationToolbar(self.aBode_Canvas, self)
+        self.aIn_toolvar = NavigationToolbar(self.aIn_Canvas, self)
+        self.aOut_toolvar = NavigationToolbar(self.aOut_Canvas, self)
+        self.Analisis_Bode_navtool.addWidget(self.aBode_toolvar)
+        self.Analisis_Entrada_navtool.addWidget(self.aIn_toolvar)
+        self.Analisis_Salida_navtool.addWidget(self.aOut_toolvar)
+
+        self.aBode_Axis = self.aBode_Figure.add_subplot()
+        self.aIn_Axis = self.aIn_Figure.add_subplot()
+        self.aOut_Axis = self.aOut_Figure.add_subplot()
+
+        self.Hs2 = TransferFunction()
+
+        self.entrada_salida_separadas_checkBox.stateChanged.connect(self.__cb_checkear_entrada_salida_separados)
+        self.__cb_checkear_entrada_salida_separados()
+        self.__clean_Bode()
+
+    # SEGUNDA VENTANA
+
+    #   Entradas y salidas juntas o separadas
+
+    def __cb_checkear_entrada_salida_separados(self):
+        if self.entrada_salida_separadas_checkBox.isChecked():
+            self.__entrada_salida_separadas()
+        else:
+            self.__entrada_salida_juntas()
+
+    def __entrada_salida_juntas(self):
+        self.__clean_In()
+        self.__clean_Out()
+
+        self.frame_5.hide()
+        self.Analisis_Salida_stackedWidget.hide()
+        self.Analisis_Salida_Borrar.hide()
+        self.Analisis_Salida_texto.hide()
+        self.line_6.hide()
+        self.Analisis_Entrada_texto.hide()
+
+    def __entrada_salida_separadas(self):
+        self.__clean_In()
+        self.__clean_Out()
+
+        self.frame_5.show()
+        self.Analisis_Salida_stackedWidget.show()
+        self.Analisis_Salida_Borrar.show()
+        self.Analisis_Salida_texto.show()
+        self.line_6.show()
+        self.Analisis_Entrada_texto.show()
+
+    #   Limpieza graficos
+
+    def __clean_Bode(self):
+        self.aBode_Axis.clear()
+        self.aBode_Axis.grid()
+        self.aBode_Canvas.draw()
+
+    def __clean_In(self):
+        self.aIn_Axis.clear()
+        self.aIn_Axis.grid()
+        self.aIn_Canvas.draw()
+
+    def __clean_Out(self):
+        self.aOut_Axis.clear()
+        self.aOut_Axis.grid()
+        self.aOut_Canvas.draw()
+
+    # PRIMERA VENTANA
+
     def __error_message(self,description):
         self.errorBox.setWindowTitle("Error")
         self.errorBox.setIcon(self.errorBox.Information)
         self.errorBox.setText(description)
         self.errorBox.exec()
 
-    def __add_plots_from_file(self, obj: DataFromFile,marker,legend):
-        size=obj.number_of_plots()
+    def __add_plots_from_file(self,x, y, size,marker,legend):
 
         if self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.SUP.value:
             for index in range(size):
-                x, y = obj.get_plot(index)
-                self.__add_plot_superior(x, y,marker,legend)
+                if size > 1:
+                    yaux = y[index]
+                else:
+                    yaux = y
+                self.__add_plot_superior(x, yaux,marker,legend)
         elif self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.INF.value:
             for index in range(size):
-                x, y = obj.get_plot(index)
-                self.__add_plot_inferior(x, y,marker,legend)
+                if size > 1:
+                    yaux = y[index]
+                else:
+                    yaux = y
+                self.__add_plot_inferior(x, yaux,marker,legend)
         elif self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.BODE.value:
             for index in range(size):
-                x, y = obj.get_plot(index)
-                if index % 2 == 0:
-                    self.__add_plot_superior(x, y,marker,legend)
+                if size > 1:
+                    yaux = y[index]
                 else:
-                    self.__add_plot_inferior(x, y,marker,legend)
+                    yaux = y
+                if index % 2 == 0:
+                    self.__add_plot_superior(x, yaux,marker,legend)
+                else:
+                    self.__add_plot_inferior(x, yaux,marker,legend)
 
     def __add_plot_superior(self,x,y,marker,legend):
+        print(y)
+        #print(x)
         self.graficoSuperior_Axis.plot(x,y, marker=marker, label=legend)
         self.graficoSuperior_Canvas.draw()
         self.graficoSuperior_Axis.legend()
@@ -164,36 +261,66 @@ class PlotTool(QWidget, Ui_Form):
         self.spinBox_pasos.hide()
 
     def __cb_Ok_Hs(self):
+        num = self.__parsing_Hs(self.Numerador_LineEdit.text(),"NUMERADOR")
+        if num == []:
+            return
+        den = self.__parsing_Hs(self.Denominador_LineEdit.text(),"DENOMINADOR")
+        if den == []:
+            return
+
+        self.Hs.load_Hs(num,den)
+        self.Hs.set_log_domain(self.spinBox_desde.value(),
+                               self.spinBox_hasta.value(),
+                               self.spinBox_pasos.value())
+        if self.Hs.is_valid():
+            frecuencia,amplitud,fase=self.Hs.get_bode()
+            # TODO: no llamar aca a las funciones de ploteo, sino mediante otra que distinga segun
+            # el modo de grafico seleccionado (superior, inferior o "bode")
+            self.__add_plot_superior(frecuencia,amplitud,Grafico.TEORICO.value,"TEORICO")
+            self.__add_plot_inferior(frecuencia,fase,Grafico.TEORICO.value,"TEORICO")
+        else:
+            self.__error_message("No pudo calcularse la funcion de transferencia")
+
+
+
+    def __parsing_Hs(self,string,description):
         s = sp.symbols('s')
         try:
-            num = parse_expr(self.Numerador_LineEdit.text())
+            pol = parse_expr(string)
         except:
-            self.__error_message("Se ingresó una expresión inválida en el Numerador\n\n" + self.HsExpressionInstructions)
-            return
+            self.__error_message("Se ingresó una expresión inválida en " + description + "\n\n"
+                                 + self.HsExpressionInstructions)
+            return []
 
-        try:
-            num_s = sp.lambdify(s, num, modules=['numpy'])
-        except:
-            self.__error_message("La expresión del numerador no es monoevaluada en s")
-
-        try:
-            num_coeff = num.as_poly().all_coeffs()
-        except:
-            self.__error_message("La expresión ingresada en el Numerador no es un polinomio")
-            return
-
+        # print(pol.free_symbols)
+        if pol.free_symbols == {s}:
+            try:
+                pol_coeff = pol.as_poly().all_coeffs()
+            except:
+                self.__error_message("La expresión ingresada en " + description + " no es un polinomio")
+                return []
+        elif pol.free_symbols == set():
+            pol_coeff = []
+            pol_coeff.append(pol.subs(s,0))
+        else:
+            self.__error_message(description + " no es una funcion monoevaluada en s")
+            return []
+        # print(pol_coeff)
+        return pol_coeff
 
     #Spice
     def __cb_spice(self):
         path, _ = QFileDialog.getOpenFileName(filter="*.raw")
         self.LTSpice.loadFile(path)
         if self.LTSpice.isValid():
-            self.mostrarSp = not self.mostrarSp
-            self.__habilita_deshabilita_Spice()
             self.spice_List.clear()
+            if not self.mostrarSp:
+                self.mostrarSp = not self.mostrarSp
+
+            self.__habilita_deshabilita_Spice()
             self.spice_List.addItems(self.LTSpice.getNames())
         else:
-            print("Archivo inválido")
+            self.__error_message("Archivo Inválido")
 
     def __habilita_deshabilita_Spice(self):
         if self.mostrarSp:
@@ -202,10 +329,16 @@ class PlotTool(QWidget, Ui_Form):
             self.spice_List.hide()
 
     def __spice_Plot(self):
-        item = self.spice_List.currentItem().text()
-        x,y = self.LTSpice.getGraph(item)
-        self.__add_plot_superior(x,y,Grafico.LTSPICE.value,"SIMULADO")
+        if  self.LTSpice.getMode() == 'AC':
+            item = self.spice_List.currentItem().text()
+            amp,phase,x = self.LTSpice.getGraph(item)
+            y = [amp,  phase]
+            self.__add_plots_from_file(x,y,2,Grafico.LTSPICE.value,"SIMULADO")
 
+        elif self.LTSpice.getMode() == 'Transient':
+            item = self.spice_List.currentItem().text()
+            x, y = self.LTSpice.getGraph(item)
+            self.__add_plots_from_file(x, y, 1, Grafico.LTSPICE.value, "SIMULADO")
 
 
     #Medicion
@@ -217,7 +350,7 @@ class PlotTool(QWidget, Ui_Form):
         if data.is_valid():
             self.__add_plots_from_file(data,Grafico.MEDIDO.value,"MEDIDO")
         else:
-            print("Archivo inválido")
+            self.__error_message("Archivo Inválido")
 
     #Graficos
 
