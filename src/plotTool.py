@@ -52,6 +52,8 @@ class PlotTool(QWidget, Ui_Form):
         self.setWindowTitle("TP GRUPAL 1 - TEORÍA DE CIRCUITOS")
         self.setWindowIcon(QtGui.QIcon('py.png'))
 
+        # PRIMER VENTANA
+
         self.LTSpice = LTSpiceData()
         self.ingresandoHs = False
         self.mostrarSp = False
@@ -92,6 +94,31 @@ class PlotTool(QWidget, Ui_Form):
         self.funcionTransferencia_PushButton.clicked.connect(self.__cb_Hs)
         self.__habilita_deshabilita_Hs()
         self.OK_Hs_PushButton.clicked.connect(self.__cb_Ok_Hs)
+
+        # SEGUNDA VENTANA
+        self.aBode_Figure = Figure()
+        self.aIn_Figure = Figure()
+        self.aOut_Figure = Figure()
+        self.aBode_Canvas = FigureCanvas(self.aBode_Figure)
+        self.aIn_Canvas = FigureCanvas(self.aIn_Figure)
+        self.aOut_Canvas = FigureCanvas(self.aOut_Figure)
+        self.aBode_Index = self.Analisis_Bode_stackedWidget.addWidget(self.aBode_Canvas)
+        self.aIn_Index = self.Analisis_Entrada_stackedWidget.addWidget(self.aIn_Canvas)
+        self.aOut_Index = self.Analisis_Salida_stackedWidget.addWidget(self.aOut_Canvas)
+        self.Analisis_Bode_stackedWidget.setCurrentIndex(self.aBode_Index)
+        self.Analisis_Entrada_stackedWidget.setCurrentIndex(self.aIn_Index)
+        self.Analisis_Salida_stackedWidget.setCurrentIndex(self.aOut_Index)
+
+        self.aBode_toolvar = NavigationToolbar(self.aBode_Canvas, self)
+        self.aIn_toolvar = NavigationToolbar(self.aIn_Canvas, self)
+        self.aOut_toolvar = NavigationToolbar(self.aOut_Canvas, self)
+        self.Analisis_Bode_navtool.addWidget(self.aBode_toolvar)
+        self.Analisis_Entrada_navtool.addWidget(self.aIn_toolvar)
+        self.Analisis_Salida_navtool.addWidget(self.aOut_toolvar)
+
+        self.aBode_Axis = self.aBode_Figure.add_subplot()
+        self.aIn_Axis = self.aIn_Figure.add_subplot()
+        self.aOut_Axis = self.aOut_Figure.add_subplot()
 
     def __error_message(self,description):
         self.errorBox.setWindowTitle("Error")
