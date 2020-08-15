@@ -11,7 +11,7 @@ class TransferFunction:
         self.HS = [] #transfer function
         self.poles = []
         self.zeros = []
-        self.gain = 0;
+        self.gain = 0
 
         self.maxFreq = 0
         self.minFreq = 0
