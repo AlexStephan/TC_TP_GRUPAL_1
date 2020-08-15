@@ -21,6 +21,11 @@ import numpy as np
 import scipy.signal as ss
 from enum import Enum
 
+# SymPy modules
+
+import sympy as sp
+from sympy.parsing.sympy_parser import parse_expr
+
 # My Own Modules
 
 from src.backend.dataFromFile import DataFromFile
@@ -50,6 +55,9 @@ class PlotTool(QWidget, Ui_Form):
         self.ingresandoHs = False
         self.mostrarSp = False
         self.errorBox = QtWidgets.QMessageBox()
+
+        self.HsExpressionInstructions = "FUNCIONES EN FRECUENCIA COMPLEJA:\nVariable:\ts\n" \
+                                        "Producto:\t*\nPotencia:\t**\nNo se admiten productos implícitos (ej: (2+s)(3+s))"
 
         self.graficoSuperior_Figure = Figure()
         self.graficoInferior_Figure = Figure()
@@ -156,7 +164,24 @@ class PlotTool(QWidget, Ui_Form):
         self.spinBox_pasos.hide()
 
     def __cb_Ok_Hs(self):
-        print("henlo")
+        s = sp.symbols('s')
+        try:
+            num = parse_expr(self.Numerador_LineEdit.text())
+        except:
+            self.__error_message("Se ingresó una expresión inválida en el Numerador\n\n" + self.HsExpressionInstructions)
+            return
+
+        try:
+            num_s = sp.lambdify(s, num, modules=['numpy'])
+        except:
+            self.__error_message("La expresión del numerador no es monoevaluada en s")
+
+        try:
+            num_coeff = num.as_poly().all_coeffs()
+        except:
+            self.__error_message("La expresión ingresada en el Numerador no es un polinomio")
+            return
+
 
     #Spice
     def __cb_spice(self):
