@@ -39,9 +39,6 @@ class TransferFunction:
 
     def set_linear_domain(self, min, max, num): #armo un dominio lineal en el tiempo
         if min <= max:
-            self.maxFreq = max
-            self.minFreq = min
-            self.numOfPoints = num
             self.t_arr = np.linspace(min, max, num)
         else:
             self.valid = False
