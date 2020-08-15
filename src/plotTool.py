@@ -125,8 +125,7 @@ class PlotTool(QWidget, Ui_Form):
 
         self.entrada_salida_separadas_checkBox.stateChanged.connect(self.__cb_checkear_entrada_salida_separados)
         self.__cb_checkear_entrada_salida_separados()
-
-
+        self.__clean_Bode()
 
     # SEGUNDA VENTANA
 
