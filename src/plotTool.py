@@ -76,7 +76,7 @@ class PlotTool(QWidget, Ui_Form):
         self.errprButton.clicked.connect(self.__cb_testing_error_window)
 
     def __error_message(self,description):
-        pass
+        print("placeholder. Nothing to see here")
 
     def __cb_testing_error_window(self):
         self.__error_message("A LA GRANDE LE PUSE CUCA")
