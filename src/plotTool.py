@@ -21,8 +21,8 @@ import scipy.signal as ss
 from enum import Enum
 
 # My Own Modules
-
 from src.backend.dataFromFile import DataFromFile
+from src.backend.LTSpiceData import LTSpiceData
 
 
 class Entrada(Enum):
@@ -43,7 +43,9 @@ class PlotTool(QWidget, Ui_Form):
         self.setupUi(self)
         self.setWindowTitle("TP GRUPAL 1 - TEORÍA DE CIRCUITOS")
 
+        self.LTSpice = LTSpiceData()
         self.ingresandoHs = False
+        self.mostrarSp = False
 
         self.graficoSuperior_Figure = Figure()
         self.graficoInferior_Figure = Figure()
@@ -65,6 +67,9 @@ class PlotTool(QWidget, Ui_Form):
         self.__cb_habilitarSegundoGrafico()
 
         self.spice_PushButton.clicked.connect(self.__cb_spice)
+        self.__habilita_deshabilita_Spice()
+        self.spice_List.itemDoubleClicked.connect(self.__spice_Plot)
+
         self.medicion_PushButton.clicked.connect(self.__cb_medido)
 
         self.borrarGraficos_PushButton.clicked.connect(self.__borrarGraficos)
@@ -72,6 +77,8 @@ class PlotTool(QWidget, Ui_Form):
 
         self.funcionTransferencia_PushButton.clicked.connect(self.__cb_Hs)
         self.__habilita_deshabilita_Hs()
+
+
 
     def __add_plots_from_file(self, obj: DataFromFile,marker,legend):
         size=obj.number_of_plots()
@@ -102,6 +109,7 @@ class PlotTool(QWidget, Ui_Form):
         self.graficoInferior_Canvas.draw()
         self.graficoInferior_Axis.legend()
 
+    #Transferencia
     def __cb_Hs(self):
         self.ingresandoHs = not self.ingresandoHs
         self.__habilita_deshabilita_Hs()
@@ -138,16 +146,32 @@ class PlotTool(QWidget, Ui_Form):
         self.spinBox_hasta.hide()
         self.spinBox_pasos.hide()
 
+    #Spice
     def __cb_spice(self):
-        path, _ = QFileDialog.getOpenFileName(filter="*.raw")
 
-        data = DataFromFile()
-        data.load_file(path)
-        if data.is_valid():
-            self.__add_plots_from_file(data,Grafico.LTSPICE.value,"SIMULADO")
+        path, _ = QFileDialog.getOpenFileName(filter="*.raw")
+        self.LTSpice.loadFile(path)
+        if self.LTSpice.isValid():
+            self.mostrarSp = not self.mostrarSp
+            self.__habilita_deshabilita_Spice()
+            self.spice_List.addItems(self.LTSpice.getNames())
         else:
             print("Archivo inválido")
 
+    def __habilita_deshabilita_Spice(self):
+        if self.mostrarSp:
+            self.spice_List.show()
+        else:
+            self.spice_List.hide()
+
+    def __spice_Plot(self):
+        item = self.spice_List.currentItem().text()
+        x,y = self.LTSpice.getGraph(item)
+        self.__add_plot_superior(x,y,Grafico.LTSPICE.value,"SIMULADO")
+
+
+
+    #Medicion
     def __cb_medido(self):
         path, _ = QFileDialog.getOpenFileName(filter="*.csv")
 
