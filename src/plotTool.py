@@ -140,6 +140,8 @@ class PlotTool(QWidget, Ui_Form):
         data = DataFromFile()
         data.load_file(path)
         if data.is_valid():
+
+
             self.__add_plots_from_file(data,Grafico.MEDIDO.value,"MEDIDO")
         else:
             print("Archivo inválido")
