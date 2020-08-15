@@ -164,7 +164,7 @@
               <widget class="QPushButton" name="OK_Hs_PushButton">
                <property name="maximumSize">
                 <size>
-                 <width>40</width>
+                 <width>16777215</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -582,9 +582,9 @@
               </layout>
              </item>
              <item>
-              <widget class="Line" name="line_4">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+              <widget class="QCheckBox" name="checkBox">
+               <property name="text">
+                <string>Entrada/Salida por separado</string>
                </property>
               </widget>
              </item>
@@ -602,7 +602,38 @@
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_16">
            <item>
-            <widget class="QStackedWidget" name="graficoSuperior_StackedWidget_2">
+            <layout class="QHBoxLayout" name="horizontalLayout_17">
+             <item>
+              <widget class="QLabel" name="Analisis_Bode_texto">
+               <property name="text">
+                <string>Respuesta en frecuencia</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="Analisis_Bode_Borrar">
+               <property name="text">
+                <string>Borrar</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QStackedWidget" name="Analisis_Bode_stackedWidget">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -624,7 +655,7 @@
              <property name="maximumSize">
               <size>
                <width>16777215</width>
-               <height>60</height>
+               <height>16777215</height>
               </size>
              </property>
              <property name="frameShape">
@@ -635,7 +666,7 @@
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_13">
               <item>
-               <layout class="QHBoxLayout" name="navigation1_2">
+               <layout class="QHBoxLayout" name="Analisis_Bode_navtool">
                 <property name="sizeConstraint">
                  <enum>QLayout::SetDefaultConstraint</enum>
                 </property>
@@ -649,7 +680,7 @@
         </layout>
        </item>
        <item>
-        <widget class="Line" name="line_7">
+        <widget class="Line" name="line_4">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
@@ -660,7 +691,38 @@
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_17">
            <item>
-            <widget class="QStackedWidget" name="graficoSuperior_StackedWidget_3">
+            <layout class="QHBoxLayout" name="horizontalLayout_19">
+             <item>
+              <widget class="QLabel" name="Analisis_Entrada_texto">
+               <property name="text">
+                <string>Entrada</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_3">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="Analisis_Entrada_Borrar">
+               <property name="text">
+                <string>Borrar</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QStackedWidget" name="Analisis_Entrada_stackedWidget">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -682,7 +744,7 @@
              <property name="maximumSize">
               <size>
                <width>16777215</width>
-               <height>60</height>
+               <height>16777215</height>
               </size>
              </property>
              <property name="frameShape">
@@ -693,7 +755,7 @@
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_15">
               <item>
-               <layout class="QHBoxLayout" name="navigation1_4">
+               <layout class="QHBoxLayout" name="Analisis_Entrada_navtool">
                 <property name="sizeConstraint">
                  <enum>QLayout::SetDefaultConstraint</enum>
                 </property>
@@ -714,7 +776,38 @@
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_18">
            <item>
-            <widget class="QStackedWidget" name="graficoSuperior_StackedWidget_4">
+            <layout class="QHBoxLayout" name="horizontalLayout_18">
+             <item>
+              <widget class="QLabel" name="Analisis_Salida_texto">
+               <property name="text">
+                <string>Salida</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="Analisis_Salida_Borrar">
+               <property name="text">
+                <string>Borrar</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QStackedWidget" name="Analisis_Salida_stackedWidget">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -736,7 +829,7 @@
              <property name="maximumSize">
               <size>
                <width>16777215</width>
-               <height>60</height>
+               <height>16777215</height>
               </size>
              </property>
              <property name="frameShape">
@@ -747,7 +840,7 @@
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_16">
               <item>
-               <layout class="QHBoxLayout" name="navigation1_5">
+               <layout class="QHBoxLayout" name="Analisis_Salida_navtool">
                 <property name="sizeConstraint">
                  <enum>QLayout::SetDefaultConstraint</enum>
                 </property>
