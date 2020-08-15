@@ -125,8 +125,6 @@ class PlotTool(QWidget, Ui_Form):
                     self.__add_plot_inferior(x, yaux,marker,legend)
 
     def __add_plot_superior(self,x,y,marker,legend):
-        print(y)
-        #print(x)
         self.graficoSuperior_Axis.plot(x,y, marker=marker, label=legend)
         self.graficoSuperior_Canvas.draw()
         self.graficoSuperior_Axis.legend()
