@@ -21,6 +21,7 @@ import scipy.signal as ss
 from enum import Enum
 
 # My Own Modules
+
 from src.backend.dataFromFile import DataFromFile
 from src.backend.LTSpiceData import LTSpiceData
 
@@ -78,7 +79,13 @@ class PlotTool(QWidget, Ui_Form):
         self.funcionTransferencia_PushButton.clicked.connect(self.__cb_Hs)
         self.__habilita_deshabilita_Hs()
 
+        self.errprButton.clicked.connect(self.__cb_testing_error_window)
 
+    def __error_message(self,description):
+        print("placeholder. Nothing to see here")
+
+    def __cb_testing_error_window(self):
+        self.__error_message("A LA GRANDE LE PUSE CUCA")
 
     def __add_plots_from_file(self, obj: DataFromFile,marker,legend):
         size=obj.number_of_plots()
@@ -178,8 +185,6 @@ class PlotTool(QWidget, Ui_Form):
         data = DataFromFile()
         data.load_file(path)
         if data.is_valid():
-
-
             self.__add_plots_from_file(data,Grafico.MEDIDO.value,"MEDIDO")
         else:
             print("Archivo inválido")
