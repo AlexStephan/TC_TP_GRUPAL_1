@@ -27,7 +27,7 @@ class TransferFunction:
 
     def load_Hs(self, numerator, denominator):
         if denominator == 0:
-            valid = False
+            self.valid = False
         else:
             self.numerator = numerator #guardo los coef del numerador
             self.denominator = denominator #guardo los coef del denominador
