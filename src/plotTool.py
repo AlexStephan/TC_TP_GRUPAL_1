@@ -251,13 +251,14 @@ class PlotTool(QWidget, Ui_Form):
 
     def __add_Analisis_plot_Bode1(self, x, y, marker, legend):
         self.aBode_Axis.semilogx(x, y, marker=marker, label=legend)
-        self.aBode_Canvas.draw()
         self.aBode_Axis.legend()
+        self.aBode_Canvas.draw()
 
     def __add_Analisis_plot_Bode2(self, x, y, marker, legend):
         self.aBode2_Axis.semilogx(x, y, marker=marker, label=legend)
-        self.aBode2_Canvas.draw()
         self.aBode2_Axis.legend()
+        self.aBode2_Canvas.draw()
+
 
     # PRIMERA VENTANA
 
@@ -294,15 +295,16 @@ class PlotTool(QWidget, Ui_Form):
                 else:
                     self.__add_plot_inferior(x, yaux, marker, legend)
 
+
     def __add_plot_superior(self, x, y, marker, legend):
         self.graficoSuperior_Axis.semilogx(x, y, marker=marker, label=legend)
-        self.graficoSuperior_Canvas.draw()
         self.graficoSuperior_Axis.legend()
+        self.graficoSuperior_Canvas.draw()
 
     def __add_plot_inferior(self, x, y, marker, legend):
         self.graficoInferior_Axis.semilogx(x, y, marker=marker, label=legend)
-        self.graficoInferior_Canvas.draw()
         self.graficoInferior_Axis.legend()
+        self.graficoInferior_Canvas.draw()
 
     # Transferencia
     def __cb_Hs(self):
