@@ -230,14 +230,17 @@ class PlotTool(QWidget, Ui_Form):
         if den == []:
             return
 
+
         num_array = eval(num.__str__())
         den_array = eval(den.__str__())
 
         self.Hs2.load_Hs(num_array,den_array)
+
         self.Hs2.set_log_domain(self.Analisis_Bode_Desde_spinBox.value(),
                                self.Analisis_Bode_Hasta_spinBox.value(),
                                self.Analisis_Bode_Pasos_spinBox.value())
         self.Hs2.set_linear_domain(0,10,10)
+
         if self.Hs2.is_valid():
             frecuencia,amplitud,fase=self.Hs2.get_bode()
             # y = [amplitud, fase]
@@ -248,12 +251,12 @@ class PlotTool(QWidget, Ui_Form):
             self.__error_message("No pudo calcularse la funcion de transferencia")
 
     def __add_Analisis_plot_Bode1(self, x, y, marker, legend):
-        self.aBode_Axis.semilogx(x, y, marker=marker, legend=legend)
+        self.aBode_Axis.semilogx(x, y, marker=marker, label=legend)
         self.aBode_Canvas.draw()
         self.aBode_Axis.legend()
 
     def __add_Analisis_plot_Bode2(self, x, y, marker, legend):
-        self.aBode2_Axis.semilogx(x, y, marker=marker, legend=legend)
+        self.aBode2_Axis.semilogx(x, y, marker=marker, label=legend)
         self.aBode2_Canvas.draw()
         self.aBode2_Axis.legend()
 
@@ -293,12 +296,12 @@ class PlotTool(QWidget, Ui_Form):
                     self.__add_plot_inferior(x, yaux, marker, legend)
 
     def __add_plot_superior(self, x, y, marker, legend):
-        self.graficoSuperior_Axis.semilogx(x, y, marker=marker, legend=legend)
+        self.graficoSuperior_Axis.semilogx(x, y, marker=marker, label=legend)
         self.graficoSuperior_Canvas.draw()
         self.graficoSuperior_Axis.legend()
 
     def __add_plot_inferior(self, x, y, marker, legend):
-        self.graficoInferior_Axis.semilogx(x, y, marker=marker, legend=legend)
+        self.graficoInferior_Axis.semilogx(x, y, marker=marker, label=legend)
         self.graficoInferior_Canvas.draw()
         self.graficoInferior_Axis.legend()
 
