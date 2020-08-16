@@ -13,7 +13,7 @@ class CSVData(DataFromFile):
 
     def loadFile(self, path):
         self.path = path
-        print(self.path)
+        #print(self.path)
 
     def getNames(self):
         with open(self.path) as csvfile:
@@ -21,7 +21,7 @@ class CSVData(DataFromFile):
             csvlist = list(data)
         return csvlist[0]
 
-    def convert2Float(strlist):
+    def convert2Float(self,strlist):
         floatlist = []
         for x in strlist:
             f = float(x)
@@ -38,12 +38,11 @@ class CSVData(DataFromFile):
         return var
 
     def getGraph(self):
-        strvar = self.getColumnList(0)
-        freq = self.convert2Float(strvar)
-        strvar = self.getColumnList(1)
-        amp = self.convert2Float(strvar)
-        strvar = self.getColumnList(2)
-        phase = self.convert2Float(strvar)
-        print(2)
+        strvar1 = self.getColumnList(0)
+        freq = self.convert2Float(strvar1)
+        strvar2 = self.getColumnList(1)
+        amp = self.convert2Float(strvar2)
+        strvar3 = self.getColumnList(2)
+        phase = self.convert2Float(strvar3)
         return freq, amp, phase
 

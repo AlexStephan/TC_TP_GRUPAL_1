@@ -363,7 +363,7 @@ class PlotTool(QWidget, Ui_Form):
 
             self.__habilita_deshabilita_Spice()
             self.spice_List.addItems(self.LTSpice.getNames())
-        else:
+        elif path:
             self.__error_message("Archivo Inválido")
 
     def __habilita_deshabilita_Spice(self):
@@ -392,10 +392,8 @@ class PlotTool(QWidget, Ui_Form):
         if self.CSV.isValid():
             freq, amp, phase = self.CSV.getGraph()
             y = [amp, phase]
-            print(3)
             self.__add_plots_from_file(freq, y, 2, Grafico.MEDIDO.value, "MEDIDO")
-
-        else:
+        elif path:
             self.__error_message("Archivo Inválido")
 
 
