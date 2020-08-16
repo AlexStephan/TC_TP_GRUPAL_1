@@ -278,16 +278,15 @@ class PlotTool(QWidget, Ui_Form):
         self.aBode2_Axis.legend()
         self.aBode2_Canvas.draw()
 
-
     def __add_Analisis_plot_In(self,x,y,marker,legend):
         self.aIn_Axis.plot(x, y, marker=marker, label=legend)
-        self.aIn_Canvas.draw()
         self.aIn_Axis.legend()
+        self.aIn_Canvas.draw()
 
     def __add_Analisis_plot_Out(self,x,y,marker,legend):
         self.aOut_Axis.plot(x, y, marker=marker, label=legend)
-        self.aOut_Canvas.draw()
         self.aOut_Axis.legend()
+        self.aOut_Canvas.draw()
 
     def __cb_analisis_ingreso_entrada(self):
         expr = self.__parsing_ft(self.Analisis_Bode_In_lineEdit.text(),"ENTRADA")
