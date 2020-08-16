@@ -26,6 +26,7 @@ class Ui_Form(object):
         self.verticalLayout = QtWidgets.QVBoxLayout()
         self.verticalLayout.setObjectName("verticalLayout")
         self.habilitarSegundoGrafico_CheckBox = QtWidgets.QCheckBox(self.tab)
+        self.habilitarSegundoGrafico_CheckBox.setChecked(True)
         self.habilitarSegundoGrafico_CheckBox.setObjectName("habilitarSegundoGrafico_CheckBox")
         self.verticalLayout.addWidget(self.habilitarSegundoGrafico_CheckBox)
         self.selectorGraficoEntrada_ComboBox = QtWidgets.QComboBox(self.tab)
@@ -476,6 +477,7 @@ class Ui_Form(object):
 
         self.retranslateUi(Form)
         self.tabWidget.setCurrentIndex(0)
+        self.selectorGraficoEntrada_ComboBox.setCurrentIndex(2)
         self.tabWidget_2.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
