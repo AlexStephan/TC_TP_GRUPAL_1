@@ -248,14 +248,14 @@ class PlotTool(QWidget, Ui_Form):
             self.__error_message("No pudo calcularse la funcion de transferencia")
 
     def __add_Analisis_plot_Bode1(self, x, y, marker, legend):
-        self.aBode_Axis.semilogx(x, y, marker=marker, legend=legend)
+        self.aBode_Axis.semilogx(x, y, marker=marker) # legend=legend)
         self.aBode_Canvas.draw()
-        self.aBode_Axis.legend()
+        # self.aBode_Axis.legend()
 
     def __add_Analisis_plot_Bode2(self, x, y, marker, legend):
-        self.aBode2_Axis.semilogx(x, y, marker=marker, legend=legend)
+        self.aBode2_Axis.semilogx(x, y, marker=marker) # legend=legend)
         self.aBode2_Canvas.draw()
-        self.aBode2_Axis.legend()
+        # self.aBode2_Axis.legend()
 
     # PRIMERA VENTANA
 
