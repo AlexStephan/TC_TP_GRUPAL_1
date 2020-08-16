@@ -230,7 +230,6 @@ class PlotTool(QWidget, Ui_Form):
         if den == []:
             return
 
-
         num_array = eval(num.__str__())
         den_array = eval(den.__str__())
 
