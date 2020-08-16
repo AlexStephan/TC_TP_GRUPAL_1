@@ -487,7 +487,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit">
+              <widget class="QLineEdit" name="Analisis_Bode_In_lineEdit">
                <property name="placeholderText">
                 <string>Señal de entrada f(t)</string>
                </property>

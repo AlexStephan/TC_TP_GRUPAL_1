@@ -141,6 +141,7 @@ class PlotTool(QWidget, Ui_Form):
         self.Analisis_Salida_Borrar.clicked.connect(self.__clean_Out)
 
         self.Analisis_Bode_Ok_pushButton.clicked.connect(self.__cb_analisis_ingreso_Bode)
+        self.Analisis_Entrada_Ok_pushButton.clicked.connect(self.__cb_analisis_ingreso_entrada)
 
     # SEGUNDA VENTANA
 
@@ -249,6 +250,24 @@ class PlotTool(QWidget, Ui_Form):
         else:
             self.__error_message("No pudo calcularse la funcion de transferencia")
 
+    def __parsing_ft(self, string, description):
+        t = sp.symbols('t')
+        try:
+            expr = parse_expr(string)
+        except:
+            self.__error_message("Se ingresó una expresión inválida en " + description + "\n\n"
+                                 + self.InExpressionInstructions)
+            return None
+
+        if expr.free_symbols == {t}:
+            f_t = sp.lambdify(t,expr,modules=['numpy'])
+        elif expr.free_symbols == set():
+            f_t = np.vectorize(sp.lambdify(t,expr,modules=['numpy']))
+        else:
+            self.__error_message(description + " no es una funcion monoevaluada en t")
+            return None
+        return f_t
+
     def __add_Analisis_plot_Bode1(self, x, y, marker, legend):
         self.aBode_Axis.semilogx(x, y, marker=marker, label=legend)
         self.aBode_Canvas.draw()
@@ -258,6 +277,42 @@ class PlotTool(QWidget, Ui_Form):
         self.aBode2_Axis.semilogx(x, y, marker=marker, label=legend)
         self.aBode2_Canvas.draw()
         self.aBode2_Axis.legend()
+
+    def __add_Analisis_plot_In(self,x,y,marker,legend):
+        self.aIn_Axis.plot(x, y, marker=marker, label=legend)
+        self.aIn_Canvas.draw()
+        self.aIn_Axis.legend()
+
+    def __add_Analisis_plot_Out(self,x,y,marker,legend):
+        self.aOut_Axis.plot(x, y, marker=marker, label=legend)
+        self.aOut_Canvas.draw()
+        self.aOut_Axis.legend()
+
+    def __cb_analisis_ingreso_entrada(self):
+        expr = self.__parsing_ft(self.Analisis_Bode_In_lineEdit.text(),"ENTRADA")
+        if expr is None:
+            return
+
+        self.Hs2.set_linear_domain(0,
+                                   self.Analisis_Entrada_Hasta_spinBox.value(),
+                                   self.Analisis_Entrada_Pasos_spinBox.value())
+
+        if not self.Hs2.is_valid():
+            self.__error_message("Los parametros ingresados no son validos")
+            return
+
+        try:
+            entrada = self.Hs2.get_input(expr)
+            salida = self.Hs2.get_output(expr)
+            if self.entrada_salida_separadas_checkBox.isChecked():
+                self.__add_Analisis_plot_In(salida[0], entrada, Grafico.TEORICO.value, "TEORICO")
+                self.__add_Analisis_plot_Out(salida[0], salida[1], Grafico.TEORICO.value, "TEORICO")
+            else:
+                self.__add_Analisis_plot_In(salida[0], entrada, Grafico.TEORICO.value, "ENTRADA")
+                self.__add_Analisis_plot_In(salida[0], salida[1], Grafico.TEORICO.value, "RESPUESTA")
+        except:
+            self.__error_message("No pudo calcularse la respuesta del sistema")
+            return
 
     # PRIMERA VENTANA
 
