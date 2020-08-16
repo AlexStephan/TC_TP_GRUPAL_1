@@ -20,6 +20,7 @@ from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as Navigatio
 import numpy as np
 import scipy.signal as ss
 from enum import Enum
+import array as arr
 
 # SymPy modules
 
@@ -260,12 +261,12 @@ class PlotTool(QWidget, Ui_Form):
                     self.__add_plot_inferior(x, yaux,marker,legend)
 
     def __add_plot_superior(self,x,y,marker,legend):
-        self.graficoSuperior_Axis.plot(x,y, marker=marker, label=legend)
+        self.graficoSuperior_Axis.semilogx(x,y, marker=marker, label=legend)
         self.graficoSuperior_Canvas.draw()
         self.graficoSuperior_Axis.legend()
 
     def __add_plot_inferior(self,x,y,marker,legend):
-        self.graficoInferior_Axis.plot(x,y, marker=marker, label=legend)
+        self.graficoInferior_Axis.semilogx(x,y, marker=marker, label=legend)
         self.graficoInferior_Canvas.draw()
         self.graficoInferior_Axis.legend()
 
@@ -314,10 +315,14 @@ class PlotTool(QWidget, Ui_Form):
         if den == []:
             return
 
-        self.Hs.load_Hs(num,den)
+        num_array = eval(num.__str__())
+        den_array = eval(den.__str__())
+
+        self.Hs.load_Hs(num_array,den_array)
         self.Hs.set_log_domain(self.spinBox_desde.value(),
                                self.spinBox_hasta.value(),
                                self.spinBox_pasos.value())
+        self.Hs.set_linear_domain(0,10,10)
         if self.Hs.is_valid():
             frecuencia,amplitud,fase=self.Hs.get_bode()
             y = [amplitud, fase]
