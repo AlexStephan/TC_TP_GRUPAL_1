@@ -31,10 +31,16 @@
            <property name="text">
             <string>Segundo gráfico</string>
            </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
           </widget>
          </item>
          <item>
           <widget class="QComboBox" name="selectorGraficoEntrada_ComboBox">
+           <property name="currentIndex">
+            <number>2</number>
+           </property>
            <item>
             <property name="text">
              <string>Entrada de gráfico superior</string>
@@ -487,7 +493,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit">
+              <widget class="QLineEdit" name="Analisis_Bode_In_lineEdit">
                <property name="placeholderText">
                 <string>Señal de entrada f(t)</string>
                </property>

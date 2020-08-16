@@ -70,7 +70,7 @@ class TransferFunction:
 
     def get_output(self, input_expression):
         if self.isLogValid and self.isLinearValid and self.isFunctionValid:
-            return ss.lsim(self.HS, U=input_expression(self.t_arr))
+            return ss.lsim(self.HS, U=input_expression(self.t_arr),T=self.t_arr)
         else:
             return []
     def get_input(self, input_expression):

@@ -19,14 +19,16 @@ from sympy.polys.polytools import Poly
 
 if __name__ == '__main__':
     try:
-        num = sp.parsing.sympy_parser.parse_expr("2*s")
+        num = sp.parsing.sympy_parser.parse_expr("2+1*s")
         print(num)
 
         s = sp.symbols('s')
 
         print(num.subs(s, 4))
-        numx = sp.lambdify(s, num, modules=['numpy'])
-        print(numx(4))
+        numx = sp.lambdify(s, num + 0 * s, modules=['numpy'])
+        print("_")
+        print(numx(np.array([1,1])))
+        print("_")
         try:
             print(num.as_poly().all_coeffs())
         except:
