@@ -91,7 +91,9 @@ class PlotTool(QWidget, Ui_Form):
         self.__cb_habilitarSegundoGrafico()
 
         self.spice_PushButton.clicked.connect(self.__cb_spice)
+        self.PushButton_Cerrar_Spice.clicked.connect(self.__cb_cerrar_spice)
         self.__habilita_deshabilita_Spice()
+
         self.spice_List.itemDoubleClicked.connect(self.__spice_Plot)
 
         self.medicion_PushButton.clicked.connect(self.__cb_medido)
@@ -466,11 +468,17 @@ class PlotTool(QWidget, Ui_Form):
         elif path:
             self.__error_message("Archivo Inválido")
 
+    def __cb_cerrar_spice(self):
+        self.mostrarSp = False
+        self.__habilita_deshabilita_Spice()
+
     def __habilita_deshabilita_Spice(self):
         if self.mostrarSp:
             self.spice_List.show()
+            self.PushButton_Cerrar_Spice.show()
         else:
             self.spice_List.hide()
+            self.PushButton_Cerrar_Spice.hide()
 
     def __spice_Plot(self):
         if self.LTSpice.getMode() == 'AC':
