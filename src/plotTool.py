@@ -61,6 +61,11 @@ class PlotTool(QWidget, Ui_Form):
         self.mostrarSp = False
         self.errorBox = QtWidgets.QMessageBox()
 
+        #Contadores
+        self.numTeo = 0
+        self.numMedi = 0
+        self.numSimu = 0
+
         self.Hs = TransferFunction()
         self.HsExpressionInstructions = "FUNCIONES EN FRECUENCIA COMPLEJA:\nVariable:\ts\n" \
                                         "Producto:\t*\nPotencia:\t**\nNo se admiten productos implícitos (ej: (2+s)(3+s))"
@@ -416,7 +421,8 @@ class PlotTool(QWidget, Ui_Form):
         if self.Hs.is_valid():
             frecuencia, amplitud, fase = self.Hs.get_bode()
             y = [amplitud, fase]
-            self.__add_plots_from_file(frecuencia, y, 2, Grafico.TEORICO.value, "TEORICO")
+            self.__add_plots_from_file(frecuencia, y, 2, Grafico.TEORICO.value, "TEORICO "+self.numTeo.__str__())
+            self.numTeo += 1
         else:
             self.__error_message("No pudo calcularse la funcion de transferencia")
 
@@ -448,7 +454,8 @@ class PlotTool(QWidget, Ui_Form):
     # Spice
     def __cb_spice(self):
         path, _ = QFileDialog.getOpenFileName(filter="*.raw")
-        self.LTSpice.loadFile(path)
+        if path:
+            self.LTSpice.loadFile(path)
         if self.LTSpice.isValid():
             self.spice_List.clear()
             if not self.mostrarSp:
@@ -470,21 +477,25 @@ class PlotTool(QWidget, Ui_Form):
             item = self.spice_List.currentItem().text()
             amp, phase, x = self.LTSpice.getGraph(item)
             y = [amp, phase]
-            self.__add_plots_from_file(x, y, 2, Grafico.LTSPICE.value, "SIMULADO")
+            self.__add_plots_from_file(x, y, 2, Grafico.LTSPICE.value, "SIMULADO "+self.numSimu.__str__())
+            self.numSimu += 1
 
         elif self.LTSpice.getMode() == 'Transient':
             item = self.spice_List.currentItem().text()
             x, y = self.LTSpice.getGraph(item)
-            self.__add_plots_from_file(x, y, 1, Grafico.LTSPICE.value, "SIMULADO")
+            self.__add_plots_from_file(x, y, 1, Grafico.LTSPICE.value, "SIMULADO "+self.numSimu.__str__())
+            self.numSimu += 1
 
     # Medicion
     def __cb_medido(self):
         path, _ = QFileDialog.getOpenFileName(filter="*.csv")
-        self.CSV.loadFile(path)
+        if path:
+            self.CSV.loadFile(path)
         if self.CSV.isValid():
             freq, amp, phase = self.CSV.getGraph()
             y = [amp, phase]
-            self.__add_plots_from_file(freq, y, 2, Grafico.MEDIDO.value, "MEDIDO")
+            self.__add_plots_from_file(freq, y, 2, Grafico.MEDIDO.value, "MEDIDO "+self.numMedi.__str__())
+            self.numMedi += 1
         elif path:
             self.__error_message("Archivo Inválido")
 
@@ -518,3 +529,8 @@ class PlotTool(QWidget, Ui_Form):
         self.graficoInferior_Axis.clear()
         self.graficoInferior_Axis.grid()
         self.graficoInferior_Canvas.draw()
+
+        self.numTeo = 0
+        self.numMedi = 0
+        self.numSimu = 0
+
