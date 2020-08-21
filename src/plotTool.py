@@ -159,6 +159,7 @@ class PlotTool(QWidget, Ui_Form):
 
         self.Analisis_Bode_Ok_pushButton.clicked.connect(self.__cb_analisis_ingreso_Bode)
         self.Analisis_Entrada_Ok_pushButton.clicked.connect(self.__cb_analisis_ingreso_entrada)
+        self.Analisis_Salida_Ok_pushButton.clicked.connect(self.__cb_analisis_ingreso_salida)
 
     # SEGUNDA VENTANA
 
@@ -361,6 +362,24 @@ class PlotTool(QWidget, Ui_Form):
                 self.__add_Analisis_plot_In(salida[0], salida[1], Grafico.TEORICO.value, "RESPUESTA")
         except:
             self.__error_message("No pudo calcularse la respuesta del sistema")
+            return
+
+    def __cb_analisis_ingreso_salida(self):
+        expr = self.__parsing_ft(self.Analisis_Bode_Out_lineEdit.text(),"SALIDA")
+        if expr is None:
+            return
+
+        try:
+            hasta = self.Analisis_Salida_Hasta_spinBox.value()
+            pasos = self.Analisis_Salida_Pasos_spinBox.value()
+            dominio = np.linspace(0,hasta,pasos)
+            imagen = expr(dominio)
+            if self.entrada_salida_separadas_checkBox.isChecked():
+                self.__add_Analisis_plot_Out(dominio,imagen , Grafico.TEORICO.value, "ARBITRARIO")
+            else:
+                self.__add_Analisis_plot_In(dominio, imagen, Grafico.TEORICO.value, "ARBITRARIO")
+        except:
+            self.__error_message("No pudo graficarse la función arbitraria")
             return
 
     # PRIMERA VENTANA
