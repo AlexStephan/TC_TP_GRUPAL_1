@@ -66,6 +66,12 @@ class TransferFunction:
         self.bode = ss.bode(self.HS, self.w_arr)
         return self.bode[0]/(2*np.pi),self.bode[1],self.bode[2]
 
+    def get_polos(self):
+        return self.HS.poles
+
+    def get_ceros(self):
+        return self.HS.zeros
+
     def get_aproximated_bode(self): # porque confiamos en Tobi <3// No confien pq es mas complicado de lo que pense xd
         pass
 

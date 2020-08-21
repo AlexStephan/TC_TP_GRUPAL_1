@@ -110,42 +110,51 @@ class PlotTool(QWidget, Ui_Form):
         self.aBode2_Figure = Figure()
         self.aIn_Figure = Figure()
         self.aOut_Figure = Figure()
+        self.aPolosCeros_Figure = Figure()
         self.aBode_Canvas = FigureCanvas(self.aBode_Figure)
         self.aBode2_Canvas = FigureCanvas(self.aBode2_Figure)
         self.aIn_Canvas = FigureCanvas(self.aIn_Figure)
         self.aOut_Canvas = FigureCanvas(self.aOut_Figure)
+        self.aPolosCeros_Canvas = FigureCanvas(self.aPolosCeros_Figure)
         self.aBode_Index = self.Analisis_Bode_stackedWidget.addWidget(self.aBode_Canvas)
         self.aBode2_Index = self.Analisis_Bode2_stackedWidget.addWidget(self.aBode2_Canvas)
         self.aIn_Index = self.Analisis_Entrada_stackedWidget.addWidget(self.aIn_Canvas)
         self.aOut_Index = self.Analisis_Salida_stackedWidget.addWidget(self.aOut_Canvas)
+        self.aPolosCeros_Index = self.Analisis_PolosCeros_stackedWidget.addWidget(self.aPolosCeros_Canvas)
         self.Analisis_Bode_stackedWidget.setCurrentIndex(self.aBode_Index)
         self.Analisis_Bode2_stackedWidget.setCurrentIndex(self.aBode2_Index)
         self.Analisis_Entrada_stackedWidget.setCurrentIndex(self.aIn_Index)
         self.Analisis_Salida_stackedWidget.setCurrentIndex(self.aOut_Index)
+        self.Analisis_PolosCeros_stackedWidget.setCurrentIndex(self.aPolosCeros_Index)
 
         self.aBode_toolvar = NavigationToolbar(self.aBode_Canvas, self)
         self.aBode2_toolvar = NavigationToolbar(self.aBode2_Canvas, self)
         self.aIn_toolvar = NavigationToolbar(self.aIn_Canvas, self)
         self.aOut_toolvar = NavigationToolbar(self.aOut_Canvas, self)
+        self.aPolosCeros_toolvar = NavigationToolbar(self.aPolosCeros_Canvas,self)
         self.Analisis_Bode_navtool.addWidget(self.aBode_toolvar)
         self.Analisis_Bode2_navtool.addWidget(self.aBode2_toolvar)
         self.Analisis_Entrada_navtool.addWidget(self.aIn_toolvar)
         self.Analisis_Salida_navtool.addWidget(self.aOut_toolvar)
+        self.Analisis_PolosCeros_navtool.addWidget(self.aPolosCeros_toolvar)
 
         self.aBode_Axis = self.aBode_Figure.add_subplot()
         self.aBode2_Axis = self.aBode2_Figure.add_subplot()
         self.aIn_Axis = self.aIn_Figure.add_subplot()
         self.aOut_Axis = self.aOut_Figure.add_subplot()
+        self.aPolosCeros_Axis = self.aPolosCeros_Figure.add_subplot()
 
         self.Hs2 = TransferFunction()
 
         self.entrada_salida_separadas_checkBox.stateChanged.connect(self.__cb_checkear_entrada_salida_separados)
         self.__cb_checkear_entrada_salida_separados()
         self.__clean_Bode()
+        self.__clean_PolosCeros()
 
         self.Analisis_Bode_Borrar.clicked.connect(self.__clean_Bode)
         self.Analisis_Entrada_Borrar.clicked.connect(self.__clean_In)
         self.Analisis_Salida_Borrar.clicked.connect(self.__clean_Out)
+        self.Analisis_PolosCeros_Borrar.clicked.connect(self.__clean_PolosCeros)
 
         self.Analisis_Bode_Ok_pushButton.clicked.connect(self.__cb_analisis_ingreso_Bode)
         self.Analisis_Entrada_Ok_pushButton.clicked.connect(self.__cb_analisis_ingreso_entrada)
@@ -201,6 +210,11 @@ class PlotTool(QWidget, Ui_Form):
         self.aOut_Axis.grid()
         self.aOut_Canvas.draw()
 
+    def __clean_PolosCeros(self):
+        self.aPolosCeros_Axis.clear()
+        self.aPolosCeros_Axis.grid()
+        self.aPolosCeros_Canvas.draw()
+
     # Ingreso del usuario
 
     def __cb_analisis_ingreso_Bode(self):
@@ -250,10 +264,24 @@ class PlotTool(QWidget, Ui_Form):
 
         if self.Hs2.is_valid():
             frecuencia,amplitud,fase=self.Hs2.get_bode()
+            polos=self.Hs2.get_polos()
+            ceros=self.Hs2.get_ceros()
+
+            xpolos = []
+            ypolos = []
+            for i in polos:
+                xpolos.append(i.real)
+                ypolos.append(i.imag)
+            xceros = []
+            yceros = []
+            for i in ceros:
+                xceros.append(i.real)
+                yceros.append(i.imag)
             # y = [amplitud, fase]
             # self.__add_plots_from_file(frecuencia,y,2,Grafico.TEORICO.value,"TEORICO")
             self.__add_Analisis_plot_Bode1(frecuencia,amplitud,Grafico.TEORICO.value,"TEORICO")
             self.__add_Analisis_plot_Bode2(frecuencia, fase, Grafico.TEORICO.value, "TEORICO")
+            self.__add_Analisis_plot_PolosCeros(xpolos,ypolos,'x',xceros,yceros,'o',"TEORICO")
         else:
             self.__error_message("No pudo calcularse la funcion de transferencia")
 
@@ -294,6 +322,19 @@ class PlotTool(QWidget, Ui_Form):
         self.aOut_Axis.plot(x, y, marker=marker, label=legend)
         self.aOut_Axis.legend()
         self.aOut_Canvas.draw()
+
+    def __add_Analisis_plot_PolosCeros(self,xpolos,ypolos,markerpolos,xceros,yceros,markerceros,legend):
+        if xpolos != []:
+            temp = self.aPolosCeros_Axis.scatter(xpolos,ypolos,marker=markerpolos,label=legend+' - Polos')
+            color = temp.get_facecolor()[0]
+            if xceros != []:
+                self.aPolosCeros_Axis.scatter(xceros,yceros,marker=markerceros,label=legend+' - Ceros',color=color)
+            self.aPolosCeros_Axis.legend()
+        else:
+            if xceros != []:
+                self.aPolosCeros_Axis.scatter(xceros,yceros,marker=markerceros,label=legend+' - Ceros')
+                self.aPolosCeros_Axis.legend()
+        self.aPolosCeros_Canvas.draw()
 
     def __cb_analisis_ingreso_entrada(self):
         expr = self.__parsing_ft(self.Analisis_Bode_In_lineEdit.text(),"ENTRADA")
