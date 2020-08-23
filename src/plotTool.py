@@ -101,6 +101,8 @@ class PlotTool(QWidget, Ui_Form):
 
         self.borrarGraficos_PushButton.clicked.connect(self.__borrarGraficos)
         self.__borrarGraficos()
+        self.refreshButton.clicked.connect(self.__cb_refresh)
+        self.__cb_refresh()
 
         self.funcionTransferencia_PushButton.clicked.connect(self.__cb_Hs)
         self.__habilita_deshabilita_Hs()
@@ -590,6 +592,12 @@ class PlotTool(QWidget, Ui_Form):
         self.graficoInferior_StackedWidget.hide()
         self.frame_2.hide()
         self.selectorGraficoEntrada_ComboBox.setCurrentIndex(Entrada.SUP.value)
+
+    def __cb_refresh(self):
+        self.graficoSuperior_Axis.legend()
+        self.graficoSuperior_Canvas.draw()
+        self.graficoInferior_Axis.legend()
+        self.graficoInferior_Canvas.draw()
 
     def __borrarGraficos(self):
         self.graficoSuperior_Axis.clear()
