@@ -398,7 +398,8 @@ class PlotTool(QWidget, Ui_Form):
                     yaux = y[index]
                 else:
                     yaux = y
-                self.__add_plot_superior(x, yaux, marker, legend)
+                legend_ = legend + ' '*index
+                self.__add_plot_superior(x, yaux, marker, legend_)
         elif self.selectorGraficoEntrada_ComboBox.currentIndex() == Entrada.INF.value:
             for index in range(size):
                 if size > 1:
