@@ -102,7 +102,7 @@ class PlotTool(QWidget, Ui_Form):
         self.borrarGraficos_PushButton.clicked.connect(self.__borrarGraficos)
         self.__borrarGraficos()
         self.refreshButton.clicked.connect(self.__cb_refresh)
-        self.__cb_refresh()
+        # self.__cb_refresh()
 
         self.funcionTransferencia_PushButton.clicked.connect(self.__cb_Hs)
         self.__habilita_deshabilita_Hs()
