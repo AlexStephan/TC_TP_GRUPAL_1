@@ -27,6 +27,7 @@ import array as arr
 
 import sympy as sp
 from sympy.parsing.sympy_parser import parse_expr
+from sympy import I
 
 # My Own Modules
 from src.backend.CSVData import CSVData
